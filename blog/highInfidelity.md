@@ -1,4 +1,4 @@
-High Infidelity
+**High Infidelity**
 
 I think one of the most memorable claims to me from the article was the one where the author wrote that both the virtual and actual world are technically “real.” I found it even more interesting when the artist argued that this due to fears that the virtual world was “taking over” in the 1990s. I had never thought of the virtual and real world as two different “dimensions of reality.” However, once I was presented with the concept, it made a lot of sense. If the virtual world technically exists, which it does, then who can say which dimension is technically “real”?
 
