@@ -7,14 +7,20 @@ let range = document.getElementById('myRange');
 
 
 //Add Project Links Here
-linkArray = ["", "", "", "", "", "", "", "", "", "", "", "", ""]
-iconArray = ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+linkArray = ["","https://twaugh99.github.io/abc-student-repo/projects/multiplicity-project/index.html", "", "", "", "", "", "", "", "", "", "", "", ""]
+iconArray = ["","assets/multiplicityicon.png", "", "", "", "", "", "", "", "", "", "", "", ""]
 
 
 function inputHappened(){
   // console.log(range.value);
   currentSelection = range.value;
+
+  console.log(currentSelection);
+
   document.getElementById('link').href = linkArray[currentSelection];
+  console.log("intended current link " + linkArray[currentSelection]);
+  console.log("current link " + document.getElementById('link').href);
+
   if(currentSelection < 11){
     document.getElementById('link').innerHTML = "Mini Project " + currentSelection;
   } else {
@@ -22,6 +28,7 @@ function inputHappened(){
   }
 
   document.getElementById('icon').src = iconArray[currentSelection];
+
 }
 
 range.addEventListener("input", inputHappened);
