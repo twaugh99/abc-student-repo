@@ -1,0 +1,36 @@
+#headerText{
+  padding-top: 10%;
+  text-align: center;
+}
+
+#sliderAndLinkDiv{
+  padding-top: 20px;
+  padding-bottom: 10%;
+  text-align: center;
+}
+
+h1{
+  font-size: 60px;
+  font-family: Papyrus,fantasy;
+}
+
+h2{
+  font-size: 40px;
+  font-family: Papyrus,fantasy;
+}
+
+a{
+  font-size: 40px;
+  font-family: Papyrus,fantasy;
+}
+
+a:hover {
+}
+
+
+input[type=range]{
+  width: 80%;
+}
+
+body{
+}
