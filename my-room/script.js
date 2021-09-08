@@ -15,11 +15,11 @@ function inputHappened(){
   // console.log(range.value);
   currentSelection = range.value;
 
-  console.log(currentSelection);
+  // console.log(currentSelection);
 
   document.getElementById('link').href = linkArray[currentSelection];
-  console.log("intended current link " + linkArray[currentSelection]);
-  console.log("current link " + document.getElementById('link').href);
+  // console.log("intended current link " + linkArray[currentSelection]);
+  // console.log("current link " + document.getElementById('link').href);
 
   if(currentSelection < 11){
     document.getElementById('link').innerHTML = "Mini Project " + currentSelection;
