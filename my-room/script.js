@@ -1,5 +1,5 @@
 console.log('script loaded');
- 
+
 
 console.log('loaded');
 
@@ -8,7 +8,7 @@ let range = document.getElementById('myRange');
 
 //Add Project Links Here
 linkArray = ["","https://twaugh99.github.io/abc-student-repo/projects/multiplicity-project/index.html", "", "", "", "", "", "", "", "", "", "", "", ""]
-iconArray = ["","assets/multiplicityicon.png", "", "", "", "", "", "", "", "", "", "", "", ""]
+iconArray = ["","assets/multiplicityIcon.png", "", "", "", "", "", "", "", "", "", "", "", ""]
 
 
 function inputHappened(){
