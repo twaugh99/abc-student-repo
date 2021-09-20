@@ -1,0 +1,19 @@
+body{
+  background-color: green;
+  text-align: center;
+}
+
+#button{
+  color: red;
+  transition: transform 0.5s;
+}
+
+#box{
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  margin: auto;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: transform 0.5s;
+}

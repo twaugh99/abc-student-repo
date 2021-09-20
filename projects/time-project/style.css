@@ -1,0 +1,44 @@
+#topDiv{
+  text-align: center;
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+
+#controlsDiv{
+  display: flex;
+  justify-content: center;
+}
+
+div{
+  margin-top: .5%;
+  margin-left: .5%;
+  margin-right: .5%;
+  margin-bottom: .5%;
+}
+
+#hugeDiv{
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+
+button{
+  font-family: "Lucida Console", "Courier New", monospace;
+  margin-left: .75%;
+}
+
+h1{
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+p{
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+input[type="checkbox"][readonly] {
+  pointer-events: none;
+}
