@@ -60,7 +60,7 @@ function startClock(count){
     clearInterval(interval);
   }
 
-  interval = setInterval(function(){ checkNextBox(count); }, 50);
+  interval = setInterval(function(){ checkNextBox(count); }, 1000);
   timerON = true;
   intervalExists = 1;
 
