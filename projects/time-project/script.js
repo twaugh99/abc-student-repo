@@ -1,5 +1,6 @@
 // console.log('script loaded');
 
+let speed = 1000;
 
 let alarmSound = new Audio('alarm.wav');
 
@@ -60,7 +61,7 @@ function startClock(count){
     clearInterval(interval);
   }
 
-  interval = setInterval(function(){ checkNextBox(count); }, 1000);
+  interval = setInterval(function(){ checkNextBox(count); }, speed);
   timerON = true;
   intervalExists = 1;
 
