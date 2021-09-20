@@ -27,7 +27,26 @@ function createcheckboxFR(id, checkNo, chunkNo){
   document.getElementById("div"+chunkNo).appendChild(newCheckbox);
 
   let addedCheckbox = document.getElementById(id);
-  addedCheckbox.addEventListener("click", updateTime(id, checkNo, chunkNo));
+  addedCheckbox.addEventListener("click", function(){
+    console.log(chunkNo);
+    console.log(checkNo);
+    currentMinute = chunkNo;
+    currentSecond = checkNo;
+
+    for(let i = 1; i < currentMinute; i++){
+      for(let x = 1; x < 61; x++){
+        let currentCheckUpdateTime = document.getElementById("chunk"+i+"checkbox"+x);
+        console.log(currentCheckUpdateTime);
+        currentCheckUpdateTime.checked = true;
+      }
+    }
+    for(let y = 1; y < currentSecond; y++){
+      let currentCheckUpdateTime = document.getElementById("chunk"+currentMinute+"checkbox"+y);
+      currentCheckUpdateTime.checked = true;
+    }
+  } );
+
+  // updateTime(id, checkNo, chunkNo)
 }
 
 let currentMinute = 1;
@@ -41,7 +60,7 @@ function startClock(count){
     clearInterval(interval);
   }
 
-  interval = setInterval(function(){ checkNextBox(count); }, 1000);
+  interval = setInterval(function(){ checkNextBox(count); }, 50);
   timerON = true;
   intervalExists = 1;
 
