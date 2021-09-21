@@ -7,8 +7,8 @@ let range = document.getElementById('myRange');
 
 
 //Add Project Links Here
-linkArray = ["","https://twaugh99.github.io/abc-student-repo/projects/multiplicity-project/index.html", "", "", "", "", "", "", "", "", "", "", "", ""]
-iconArray = ["","assets/multiplicityIcon.png", "", "", "", "", "", "", "", "", "", "", "", ""]
+linkArray = ["","https://twaugh99.github.io/abc-student-repo/projects/multiplicity-project/index.html", "https://twaugh99.github.io/abc-student-repo/projects/time-project/", "", "", "", "", "", "", "", "", "", "", ""]
+iconArray = ["","assets/multiplicityIcon.png", "assets/timeIcon.png", "", "", "", "", "", "", "", "", "", "", ""]
 
 
 function inputHappened(){
