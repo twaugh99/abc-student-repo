@@ -1,3 +1,4 @@
 body{
-  background-color: grey;
+  background-image: url("dogTile.png");
+  background-repeat: repeat;
 }

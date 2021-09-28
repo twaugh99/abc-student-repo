@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <img src="pieces/piece10.png">
+    <img id="puzzleImage" src="pieces/piece10.png">
+    <script src="popupScript.js" charset="utf-8"></script>
+    <script>
+    window.onbeforeunload = function() {
+       return "Dog Puzzle Dog Puzzle Dog Puzzle Dog Puzzle Dog Puzzle Dog Puzzle Dog Puzzle Dog Puzzle";
+     }
+    </script>
   </body>
 </html>
