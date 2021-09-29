@@ -61,18 +61,26 @@ document.getElementById("button").addEventListener("click", ()=>{
   //starting the Puzzle
 
   //protects the user from accidentally opening way too many pop-ups
+  document.body.style.backgroundImage = "url('dogTileDistorted.png')";
+
+
+
+
   if(windowsONOFF == 1){
     closeAllWindows();
   }
 
   determineGoalposts();
 
-  generateWindows();
 
-  startBarking();
+  setTimeout(function() {
+    generateWindows();
 
-  windowsONOFF = 1;
+    startBarking();
 
+    windowsONOFF = 1;
+
+  }, 500);
   // console.log('windows on? ' + windowsONOFF);
 
 })
@@ -119,14 +127,14 @@ function updatePlaceHolderXYVariables(){
 
 }
 
-let tolerance = 400;
+let tolerance = 200;
 
 function updateSound(){
   for(let i = 0; i < 12; i++){
     if(windowSolved[i] == 1){
-      // STOP THE AUDIO FILE
-      // MUST FIRST START THE AUDIO FILE
-      barks[i].pause();
+      barks[i].volume = 0;
+    } else {
+      barks[i].volume = 1;
     }
   }
 }
@@ -139,6 +147,9 @@ function checkIfCompleted(){
     }
   }
   if(solvedCount == 12){
+    document.body.style.backgroundImage = "url('dogTile.png')";
+    document.getElementById("button").innerHTML = "🐕 AGAIN? 🐕";
+
     closeAllWindows();
   }
 }

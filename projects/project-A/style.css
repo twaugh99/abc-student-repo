@@ -2,3 +2,23 @@ body{
   background-image: url("dogTile.png");
   background-repeat: repeat;
 }
+
+
+#buttonDiv{
+  /* margin-top: 40% */
+  height: 40em;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+#button{
+  font-family: "Comic Sans MS", "Comic Sans";
+  font-size: 50px;
+}
+
+#button:hover{
+  background-color: red;
+  border: magenta;
+  font-size: 100px;
+}
