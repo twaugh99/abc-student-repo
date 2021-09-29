@@ -18,7 +18,7 @@ for(let i = 0; i < 12; i++){
   windowSolved[i] = 0;
 }
 
-console.log(windowSolved);
+// console.log(windowSolved);
 
 
 // console.log(windows);
@@ -46,7 +46,7 @@ for(let i = 0; i < 12; i++){
   barks[i].src = "barks/bark"+i+".mp3";
 }
 
-console.log(barks);
+// console.log(barks);
 
 function startBarking(){
   for(let i = 0; i < 12; i++){
@@ -94,9 +94,9 @@ function determineGoalposts(){
     }
   }
 
-  console.log("goalposts: ");
-  console.log(windowGoalpostX);
-  console.log(windowGoalpostY);
+  // console.log("goalposts: ");
+  // console.log(windowGoalpostX);
+  // console.log(windowGoalpostY);
 }
 
 //defining placeholder XY arrays that will be modified in order to allow for some tolerance when checking if solved
@@ -191,14 +191,14 @@ function checkIfSolved(){
   }
 
   console.log(points + "points");
-  if(points == 24){
+  if(points == 20){
     console.log('Puzzle Solved!');
     closeAllWindows();
   }
 }
 
 function newWindow(i, parameters){
-  console.log('i = '+i);
+  // console.log('i = '+i);
 
   windows[i] = window.open("window"+i+".html", "window"+i, parameters);
 
