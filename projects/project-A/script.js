@@ -119,10 +119,7 @@ function updatePlaceHolderXYVariables(){
 
 }
 
-let toleranceX = 300;
-let toleranceY = 400;
-
-
+let tolerance = 400;
 
 function updateSound(){
   for(let i = 0; i < 12; i++){
@@ -134,28 +131,43 @@ function updateSound(){
   }
 }
 
+function checkIfCompleted(){
+  let solvedCount = 0;
+  for(let i = 0; i < 12; i++){
+    if(windowSolved[i] == 1){
+      solvedCount++;
+    }
+  }
+  if(solvedCount == 12){
+    closeAllWindows();
+  }
+}
+
+
 function xSolved(i){
-  windowY[i] = windowY[i] - (toleranceY/2);
-  for(let z = 0; z < toleranceY; z++){
+  windowY[i] = windowY[i] - (tolerance/2);
+  for(let z = 0; z < tolerance; z++){
     windowY[i]++;
     if(windowY[i] == windowGoalpostY[i]){
       // points++;
       windowSolved[i] = 1;
       console.log("window " + i + " solved: " + windowSolved[i]);
       updateSound();
+      checkIfCompleted();
     }
   }
 }
 
 function ySolved(i){
-  windowX[i] = windowX[i] - (toleranceX/2);
-  for(let z = 0; z < toleranceX; z++){
+  windowX[i] = windowX[i] - (tolerance/2);
+  for(let z = 0; z < tolerance; z++){
     windowX[i]++;
     if(windowX[i] == windowGoalpostX[i]){
       // points++;
       windowSolved[i] = 1;
       console.log("window " + i + " solved: " + windowSolved[i]);
       updateSound();
+      checkIfCompleted();
     }
   }
 }
@@ -165,12 +177,15 @@ function checkIfSolved(){
   updatePlaceHolderXYVariables();
 
   points = 0;
+  for(let i = 0; i < 12; i++){
+    windowSolved[i] = 0;
+  }
 
   for(let i = 0; i < 12; i++){
 
     //X
-    windowX[i] = windowX[i] - (toleranceX/2);
-    for(let z = 0; z < toleranceX; z++){
+    windowX[i] = windowX[i] - (tolerance/2);
+    for(let z = 0; z < tolerance; z++){
       windowX[i]++;
       if(windowX[i] == windowGoalpostX[i]){
         points++;
@@ -179,8 +194,8 @@ function checkIfSolved(){
     }
 
     //Y
-    windowY[i] = windowY[i] - (toleranceY/2);
-    for(let z = 0; z < toleranceY; z++){
+    windowY[i] = windowY[i] - (tolerance/2);
+    for(let z = 0; z < tolerance; z++){
       windowY[i]++;
       if(windowY[i] == windowGoalpostY[i]){
         points++;
@@ -190,11 +205,6 @@ function checkIfSolved(){
 
   }
 
-  console.log(points + "points");
-  if(points == 20){
-    console.log('Puzzle Solved!');
-    closeAllWindows();
-  }
 }
 
 function newWindow(i, parameters){
