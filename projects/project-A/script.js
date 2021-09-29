@@ -119,8 +119,8 @@ function updatePlaceHolderXYVariables(){
 
 }
 
-let toleranceX = 200;
-let toleranceY = 350;
+let toleranceX = 300;
+let toleranceY = 400;
 
 
 
@@ -212,12 +212,9 @@ function newWindow(i, parameters){
 function generateWindows(){
   // console.log("main script each width: " + eachWidth);
 
-  let max = screen.width;
-
-
   for(let i = 0; i < 12; i++){
-    let randomLeft = (Math.random() * max) - eachWidth;
-    let randomTop = (Math.random() * max) - eachHeight;
+    let randomLeft = (Math.random() * screen.width) - eachWidth;
+    let randomTop = (Math.random() * screen.width) - eachHeight;
 
     // console.log('random left: '+ randomLeft);
     // console.log('random top: '+ randomTop);
