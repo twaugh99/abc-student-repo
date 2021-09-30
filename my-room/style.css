@@ -9,19 +9,55 @@
   text-align: center;
 }
 
+#icon{
+  height: 200px;
+}
+
+#icon:hover{
+  cursor: pointer;
+}
+
+#imageDiv{
+  padding-top: 30px;
+  /* padding-bottom: 15px; */
+
+  margin-top: 20px;
+
+}
+
 h1{
-  font-size: 60px;
+  margin-top: 60px;
+  font-size: 50px;
   font-family: Papyrus,fantasy;
+  color: white;
+  text-decoration: underline;
+  margin-bottom: 0px;
 }
 
 h2{
-  font-size: 40px;
+
+  font-size: 20px;
   font-family: Papyrus,fantasy;
+  color: white;
+
 }
 
 a{
   font-size: 40px;
   font-family: Papyrus,fantasy;
+  color: white;
+  outline-color: white;
+  /* border: 3px; */
+  /* border-style: double; */
+}
+
+p{
+  font-size: 20px;
+  font-family: Papyrus,fantasy;
+  color: white;
+  outline-color: white;
+  /* border: 3px; */
+  /* border-style: double; */
 }
 
 a:hover {
@@ -30,4 +66,9 @@ a:hover {
 
 input[type=range]{
   width: 1200px;
+}
+
+
+body{
+  background-color: #551A8B
 }
