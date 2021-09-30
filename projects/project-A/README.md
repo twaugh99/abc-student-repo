@@ -1,4 +1,4 @@
- # **Dog-Themed "Malware" Puzzle__
+ # __Dog-Themed "Malware" Puzzle**
 
 #### What I Learned / Enjoyed
 
