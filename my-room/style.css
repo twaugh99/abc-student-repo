@@ -63,12 +63,14 @@ p{
 a:hover {
 }
 
-
+#glitterGif{
+  margin-top: 50px;
+}
 input[type=range]{
   width: 1200px;
 }
 
 
 body{
-  background-color: #551A8B
+  background-color: #551A8B;
 }
