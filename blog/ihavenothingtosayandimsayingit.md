@@ -1,4 +1,4 @@
-##I/O/D - Web Stalker
+**I/O/D - Web Stalker**
 
 I love the idea of a browser that encourages interaction with the website. However, I understand why unfortunately this is not a good format for the web. As fun as it is, it would definitely break many websites and make them less user-friendly. At the end of the day, one of the modern internet’s biggest selling points is how user friendly it is even to inexperienced users.
 
@@ -6,7 +6,7 @@ Web Stalker used this point of difference to differentiate itself from Netscape 
 
 I also really liked the tidbit that the acronym IOD “stands for everything it is possible for it to stand for.”
 
-##I Have Nothing to Say and I’m Saying It
+**I Have Nothing to Say and I’m Saying It**
 
 I was initially charmed by the creative use of the tools provided by the internet things such as fax jams. Because these artists were intimately familiar with the internet they could find these loopholes through which they could attack. I also thought it was really interesting in the excerpt titled “Electronic Civil Disobedience” about how power dynamics based on the flow of capital had transitioned online. Thus, the most effective method of resistance was also online. It was also quite notable that the niche Zapatista movement was able to find support online. I liked the idea of the “virtual sit-in” as well. I saw it as a digital evolution of the traditional methods of peaceful protest. I also thought it was so creative that they reloaded non-existent file paths to send messages to the enemy.
 
