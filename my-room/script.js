@@ -7,9 +7,9 @@ let range = document.getElementById('myRange');
 
 
 //Add Project Links Here
-linkArray = ["","https://twaugh99.github.io/abc-student-repo/projects/multiplicity-project", "https://twaugh99.github.io/abc-student-repo/projects/time-project", "", "", "", "", "", "", "", "", "https://twaugh99.github.io/abc-student-repo/projects/project-A", "", ""]
-iconArray = ["","assets/multiplicityIcon.png", "assets/timeIcon.png", "", "", "", "", "", "", "", "", "assets/projectAIcon.png", "", ""]
-titleArray = ["","Multiplicity Project  (9/9/21)", "Time Project  (9/9/21)", "", "", "", "", "", "", "", "", "Project A  (9/30/21)", "", ""]
+linkArray = ["","https://twaugh99.github.io/abc-student-repo/projects/multiplicity-project", "https://twaugh99.github.io/abc-student-repo/projects/time-project", "", "https://github.com/twaugh99/abc-student-repo/blob/master/projects/bug-extension.zip", "", "", "", "", "", "", "https://twaugh99.github.io/abc-student-repo/projects/project-A", "", ""]
+iconArray = ["","assets/multiplicityIcon.png", "assets/timeIcon.png", "", "assets/bugIcon.png", "", "", "", "", "", "", "assets/projectAIcon.png", "", ""]
+titleArray = ["","Multiplicity Project  (9/9/21)", "Time Project  (9/9/21)", "", "Bug Extension (10/12/21)", "", "", "", "", "", "", "Project A  (9/30/21)", "", ""]
 
 
 function inputHappened(){
