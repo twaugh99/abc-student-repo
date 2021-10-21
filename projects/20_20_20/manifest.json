@@ -1,0 +1,17 @@
+{
+    "name": "20/20/20",
+    "description": "Chrome Extension to reduce Eye Strain",
+    "version": "1.0",
+    "manifest_version": 2,
+    "browser_action": {
+      "default_icon": "202020icon.png"
+    },
+    "background":{
+      "scripts": ["backgroundscript.js"]
+    },
+    "permissions":[
+      "storage",
+      "tabs",
+      "idle"
+    ]
+}
