@@ -9,7 +9,32 @@ console.log('background script loaded');
 //if in history mode, record the input along with timestamps
 
 let currentDrumState = "off";
+
+chrome.storage.sync.get("drumMode", function(obj){
+	 console.log(obj);
+	 if(obj.drumMode == "on") {
+			console.log("current Drum state: " + currentDrumState);
+			toggleDrums("on");
+	 }
+	 if(obj.drumMode == "off") {
+			toggleDrums("off");
+	 }
+});
+
+
+
 let currentMode = "live";
+
+chrome.storage.sync.get("mode", function(obj){
+	 console.log(obj);
+	 if(obj.mode == "history") {
+		 	currentMode = "history";
+	 }
+	 if(obj.mode == "live") {
+		 	currentMode = "live";
+	 }
+});
+
 
 const now = Tone.now();
 
@@ -28,8 +53,7 @@ let octaveFloor = 3;
 let octaveCeiling = 5;
 
 
-let recorder = new Tone.Recorder();
-
+const recorder = new Tone.Recorder();
 
 const phaser = new Tone.Phaser({
 	frequency: 15,
@@ -50,6 +74,16 @@ chordSynth.set({
     decay: 2,
     release: 4
   }
+}).connect(phaser).connect(freeverb);
+
+const chordSynthRecorded = new Tone.PolySynth().toDestination();
+chordSynth.set({
+  volume: 0.5,
+  envelope: {
+    attack: 3,
+    decay: 2,
+    release: 4
+  }
 }).connect(phaser).connect(freeverb).connect(recorder);
 
 
@@ -61,7 +95,7 @@ mouseSynth.set({
     decay: 0
     // release: 2
   }
-}).connect(phaser).connect(freeverb).connect(recorder);
+}).connect(phaser).connect(freeverb);
 
 const bendSynth = new Tone.Synth().toDestination();
 bendSynth.set({
@@ -71,12 +105,14 @@ bendSynth.set({
     decay: 10,
     release: 6
   }
-}).connect(freeverb).connect(recorder);
+}).connect(freeverb);
 
-recorder.start();
 
 
 chordSynth.volume.value = -30;
+chordSynthRecorded.volume.value = -1000;
+
+
 bendSynth.volume.value = -30;
 mouseSynth.volume.value = -30;
 
@@ -236,7 +272,13 @@ function playChord(){
   console.log('current scale: ' + currentScale);
 
   if(currentChord == 1){
-    chordSynth.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
+		console.log("chord 1, current state: " + currentMode);
+		if(currentMode == "live"){
+			chordSynth.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
+		}
+
     currentStep = 4;
   }
 
@@ -379,9 +421,20 @@ function shiftBendActiveTowardsZero(){
 }
 
 function playbackRecording(){
-	recorder.stop();
-	recorder.play();
+	//stops recoding
+
+	//plays recording
+	console.log("playing recording");
+
+
+	const recording = recorder.stop();
+	const url = URL.createObjectURL(recording);
+	const anchor = document.createElement("a");
+	anchor.download("recording.webm");
+	anchor.href = url;
+	anchor.click;
 }
+
 
 
 var intervalID = setInterval(shiftBendCounterTowardsZero, 25);
@@ -467,15 +520,17 @@ drumLoop.addEventListener("ended", ()=>{
 function toggleMode(mode){
   if(mode == "history"){
 //record inputs for later playback here
-		console.log('mode is history');
-		recorder.stop();
-		recorder.start();
+		console.log('mode is history, listening and recording inputs');
     currentMode = "history";
+		recorder.start();
+		console.log("started recording");
+
   } else {
 //send inputs
 		console.log('mode is live');
-		recorder.stop();
     currentMode = "live";
+		recorder.stop();
+		console.log("stopped recording");
   }
 }
 

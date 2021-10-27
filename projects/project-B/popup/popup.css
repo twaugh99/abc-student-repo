@@ -6,6 +6,10 @@ label, h1, p{
   color: black;
 }
 
+p{
+  font-size: 10px;
+}
+
 select{
   -webkit-filter: invert(100%);
   filter: invert(100%);
