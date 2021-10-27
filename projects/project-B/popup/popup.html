@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <div id="bigDiv">
+      <div id="titleAndControlsDiv">
+        <h1>SwipeySynth</h1>
+
+        <label for="scaleDropdown">Scale: </label>
+        <select name="scaleDropdown" id="scaleDropdown">
+          <option value="C_Major">C Major</option>
+          <option value="Db_Major">Db Major</option>
+          <option value="D_Major">D Major</option>
+          <option value="Eb_Major">Eb Major</option>
+          <option value="E_Major">E Major</option>
+          <option value="F_Major">F Major</option>
+          <option value="F#_Major">F# Major</option>
+          <option value="G_Major">G Major</option>
+          <option value="Ab_Major">Ab Major</option>
+          <option value="A_Major">A Major</option>
+          <option value="Bb_Major">Bb Major</option>
+          <option value="B_Major">B Major</option>
+          <option value="C_Minor">C Minor</option>
+          <option value="C#_Minor">C# Minor</option>
+          <option value="D_Minor">D Minor</option>
+          <option value="Eb_Minor">Eb Minor</option>
+          <option value="E_Minor">E Minor</option>
+          <option value="F_Minor">F Minor</option>
+          <option value="F#_Minor">F# Minor</option>
+          <option value="G_Minor">G Minor</option>
+          <option value="G#_Minor">G# Minor</option>
+          <option value="A_Minor">A Minor</option>
+          <option value="Bb_Minor">Bb Minor</option>
+          <option value="B_Minor">B Minor</option>
+        </select>
+
+
+        <div id="volumeSliderDiv">
+          <label for="volumeSlider">Volume:</label>
+          <input type="range" min="-60" max="0" value="-30" class="slider" id="volumeSlider">
+        </div>
+
+        <div id="drumToggleDiv">
+          <button id="drumOffButton" type="button">Drum Off</button>
+          <button id="drumOnButton" type="button">Drum On</button>
+        </div>
+
+        <div id="modeToggleDiv">
+          <button id="liveModeButton" type="button">Live Mode</button>
+          <button id="historyModeButton" type="button">History Mode</button>
+          <button id="historyModePlaybackButton" type="button">History Mode Playblack</button>
+        </div>
+
+      </div>
+      <div id="instructionsDiv">
+        <p>Click to play a 7th chord of the fundamental of the scale</p>
+        <p>Scroll to play the 3rd note from the funamental, scrolling further modulates the pitch</p>
+        <p>Move the mouse to play a series of notes in the chosen scale</p>
+        <p>After a chord switch, the synth controlled by the mouse starts on the 5th note from the fundamental</p>
+        <p>Time spent moving/scrolling is the important element, not the distance moved/scrolled</p>
+      </div>
+    </div>
+    <script src="popup.js" charset="utf-8"></script>
+  </body>
+</html>

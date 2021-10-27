@@ -1,0 +1,47 @@
+body{
+  background-color: #9999cc;
+}
+
+label, h1, p{
+  color: black;
+}
+
+select{
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+select, option, p, label, h1, button{
+  font-family: 'Courier New', monospace;
+}
+
+#bigDiv{
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#instructionsDiv{
+  margin-top: 10px;
+
+  text-align: center;
+
+  padding-left: 5px;
+  padding-right: 5px;
+
+  border-style: double;
+  border-color: black;
+}
+
+#modeToggleDiv, #drumToggleDiv, #volumeSliderDiv{
+  margin-top: 10px;
+}
+
+button{
+  background-color: white;
+}
+
+/* button:hover{
+  color: grey;
+} */
