@@ -1,44 +1,8 @@
 console.log('background script loaded');
 
-//receive inputs from content script
-
-//check mode
-
-//if in instant playback mode, immediately play sounds
-
-//if in history mode, record the input along with timestamps
-
-let currentDrumState = "off";
-
-chrome.storage.sync.get("drumMode", function(obj){
-	 console.log(obj);
-	 if(obj.drumMode == "on") {
-			console.log("current Drum state: " + currentDrumState);
-			toggleDrums("on");
-	 }
-	 if(obj.drumMode == "off") {
-			toggleDrums("off");
-	 }
-});
-
-
-
-let currentMode = "live";
-
-chrome.storage.sync.get("mode", function(obj){
-	 console.log(obj);
-	 if(obj.mode == "history") {
-		 	currentMode = "history";
-	 }
-	 if(obj.mode == "live") {
-		 	currentMode = "live";
-	 }
-});
-
-
 const now = Tone.now();
 
-let phaserDryWet = .4;
+let phaserDryWet = .2;
 let currentStep = 2;
 
 let mouseCounter = 0;
@@ -65,7 +29,6 @@ const phaser = new Tone.Phaser({
 const freeverb = new Tone.Freeverb().toDestination();
 freeverb.dampening = 4000;
 
-
 const chordSynth = new Tone.PolySynth().toDestination();
 chordSynth.set({
   volume: 0.5,
@@ -76,7 +39,7 @@ chordSynth.set({
   }
 }).connect(phaser).connect(freeverb);
 
-const chordSynthRecorded = new Tone.PolySynth().toDestination();
+const chordSynthRecorded = new Tone.PolySynth();
 chordSynth.set({
   volume: 0.5,
   envelope: {
@@ -85,7 +48,6 @@ chordSynth.set({
     release: 4
   }
 }).connect(phaser).connect(freeverb).connect(recorder);
-
 
 const mouseSynth = new Tone.Synth().toDestination();
 mouseSynth.set({
@@ -97,6 +59,16 @@ mouseSynth.set({
   }
 }).connect(phaser).connect(freeverb);
 
+const mouseSynthRecorded = new Tone.Synth();
+mouseSynth.set({
+  volume: 0.2,
+  envelope: {
+    attack: 0.1,
+    decay: 0
+    // release: 2
+  }
+}).connect(phaser).connect(freeverb).connect(recorder);
+
 const bendSynth = new Tone.Synth().toDestination();
 bendSynth.set({
   volume: 0.075,
@@ -107,14 +79,53 @@ bendSynth.set({
   }
 }).connect(freeverb);
 
+const bendSynthRecorded = new Tone.Synth();
+bendSynth.set({
+  volume: 0.075,
+  envelope: {
+    attack: 15,
+    decay: 10,
+    release: 6
+  }
+}).connect(freeverb).connect(recorder);
 
-
+//defaults
 chordSynth.volume.value = -30;
-chordSynthRecorded.volume.value = -1000;
-
-
 bendSynth.volume.value = -30;
 mouseSynth.volume.value = -30;
+
+//getting settings from chrome storage
+let currentDrumState = "off";
+chrome.storage.sync.get("drumMode", function(obj){
+	 console.log(obj);
+	 if(obj.drumMode == "on") {
+			console.log("current Drum state: " + currentDrumState);
+			toggleDrums("on");
+	 }
+	 if(obj.drumMode == "off") {
+			toggleDrums("off");
+	 }
+});
+
+let currentMode = "live";
+chrome.storage.sync.get("mode", function(obj){
+	 console.log(obj);
+	 if(obj.mode == "history") {
+		 	currentMode = "history";
+			toggleMode(currentMode);
+	 }
+	 if(obj.mode == "live") {
+		 	currentMode = "live";
+			toggleMode(currentMode);
+	 }
+});
+
+let currentVolume = "-30";
+chrome.storage.sync.get("volume", function(obj){
+	 console.log("volume is: " + obj.volume);
+	 changeVolume(obj.volume);
+});
+
 
 
 //musical scale arrays
@@ -147,102 +158,78 @@ let currentScale = scale_C_Major;
 
 
 function changeScale(scale){
-
 //I know this part of the code looks terrible, I tried doing it with variables but had a ton of issues because I am working with arrays
 	console.log('scale: ' + scale);
 
 	if(scale == "C_Major"){
 		currentScale = scale_C_Major;
 	}
-
 	if(scale == "Db_Major"){
 		currentScale = scale_Db_Major;
 	}
-
 	if(scale == "D_Major"){
 		currentScale = scale_D_Major;
 	}
-
 	if(scale == "Eb_Major"){
 		currentScale = scale_Eb_Major;
 	}
-
 	if(scale == "E_Major"){
 		currentScale = scale_E_Major;
 	}
-
 	if(scale == "F_Major"){
 		currentScale = scale_F_Major;
 	}
-
 	if(scale == "F#_Major"){
 		currentScale = scale_Fsharp_Major;
 	}
-
 	if(scale == "G_Major"){
 		currentScale = scale_G_Major;
 	}
-
 	if(scale == "Ab_Major"){
 		currentScale = scale_Ab_Major;
 	}
-
 	if(scale == "A_Major"){
 		currentScale = scale_A_Major;
 	}
-
 	if(scale == "Bb_Major"){
 		currentScale = scale_Bb_Major;
 	}
-
 	if(scale == "B_Major"){
 		currentScale = scale_B_Major;
 	}
-
 	if(scale == "C_Minor"){
 		currentScale = scale_C_Minor;
 	}
-
 	if(scale == "C#_Minor"){
 		currentScale = scale_Csharp_Minor;
 	}
-
 	if(scale == "D_Minor"){
 		currentScale = scale_D_Minor;
 	}
-
 	if(scale == "Eb_Minor"){
 		currentScale = scale_Eb_Minor;
 	}
-
 	if(scale == "E_Minor"){
 		currentScale = scale_E_Minor;
 	}
-
 	if(scale == "F_Minor"){
 		currentScale = scale_F_Minor;
 	}
-
 	if(scale == "F#_Minor"){
 		currentScale = scale_Fsharp_Minor;
 	}
-
 	if(scale == "G_Minor"){
 		currentScale = scale_G_Minor;
 	}
-
 	if(scale == "G#_Minor"){
 		currentScale = scale_Gsharp_Minor;
 	}
-
 	if(scale == "A_Minor"){
 		currentScale = scale_A_Minor;
 	}
-
 	if(scale == "Bb_Minor"){
 		currentScale = scale_Bb_Minor;
 	}
-
 	if(scale == "B_Minor"){
 		currentScale = scale_B_Minor;
 	}
@@ -260,6 +247,11 @@ function changeVolume(volumeFromPopup){
   chordSynth.volume.value = volumeFromPopup;
   bendSynth.volume.value = volumeFromPopup;
   mouseSynth.volume.value = volumeFromPopup;
+
+	volumeFromPopup = volumeFromPopup * (-1);
+	newVolume =  ((volumeFromPopup - 0) / (60 - 0) ) * (1 - 0) + 0;
+	newVolume = 1 - newVolume;
+	drumLoop.volume = newVolume;
 }
 
 
@@ -268,62 +260,89 @@ let octave = 3;
 
 let currentChord = 1;
 
+
 function playChord(){
   console.log('current scale: ' + currentScale);
 
   if(currentChord == 1){
-		console.log("chord 1, current state: " + currentMode);
 		if(currentMode == "live"){
 			chordSynth.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
 		} else {
 			chordSynthRecorded.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
 		}
-
     currentStep = 4;
   }
 
   if(currentChord == 2){
-    chordSynth.triggerAttackRelease([currentScale[4]+octave, currentScale[6]+octave, currentScale[1]+(octave+1)], "4n");
-    currentStep = 1;
+		if(currentMode == "live"){
+    	chordSynth.triggerAttackRelease([currentScale[4]+octave, currentScale[6]+octave, currentScale[1]+(octave+1)], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[4]+octave, currentScale[6]+octave, currentScale[1]+(octave+1)], "4n");
+		}
+	  currentStep = 1;
     if(octave < octaveCeiling){
       octave++;
     }
   }
 
   if(currentChord == 3){
-    chordSynth.triggerAttackRelease([currentScale[3]+octave, currentScale[5]+octave, currentScale[0]+(octave+1)], "4n");
-    currentStep = 0;
+		if(currentMode == "live"){
+    	chordSynth.triggerAttackRelease([currentScale[3]+octave, currentScale[5]+octave, currentScale[0]+(octave+1)], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[3]+octave, currentScale[5]+octave, currentScale[0]+(octave+1)], "4n");
+		}
+		currentStep = 0;
   }
 
   if(currentChord == 4){
-    chordSynth.triggerAttackRelease([currentScale[5]+octave, currentScale[0]+(octave+1), currentScale[2]+(octave+1)], "4n");
-    currentStep = 2;
+		if(currentMode == "live"){
+    	chordSynth.triggerAttackRelease([currentScale[5]+octave, currentScale[0]+(octave+1), currentScale[2]+(octave+1)], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[5]+octave, currentScale[0]+(octave+1), currentScale[2]+(octave+1)], "4n");
+		}
+		currentStep = 2;
     if(octave > octaveFloor){
       octave = octave - 1;
     }
   }
 
   if(currentChord == 5){
-    chordSynth.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
-    currentStep = 4;
+		if(currentMode == "live"){
+    	chordSynth.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[0]+octave, currentScale[2]+octave, currentScale[4]+octave], "4n");
+		}
+		currentStep = 4;
   }
 
   if(currentChord == 6){
-    chordSynth.triggerAttackRelease([currentScale[4]+octave, currentScale[6]+octave, currentScale[1]+(octave+1)], "4n");
-    currentStep = 1;
+		if(currentMode == "live"){
+    	chordSynth.triggerAttackRelease([currentScale[4]+octave, currentScale[6]+octave, currentScale[1]+(octave+1)], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[4]+octave, currentScale[6]+octave, currentScale[1]+(octave+1)], "4n");
+		}
+	  currentStep = 1;
     if(octave < octaveCeiling){
       octave++;
     }
   }
 
   if(currentChord == 7){
-    chordSynth.triggerAttackRelease([currentScale[5]+octave, currentScale[0]+(octave+1), currentScale[2]+(octave+1)], "4n");
-    currentStep = 2;
+		if(currentMode == "live"){
+    	chordSynth.triggerAttackRelease([currentScale[5]+octave, currentScale[0]+(octave+1), currentScale[2]+(octave+1)], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[5]+octave, currentScale[0]+(octave+1), currentScale[2]+(octave+1)], "4n");
+		}
+		currentStep = 2;
   }
 
   if(currentChord == 8){
-    chordSynth.triggerAttackRelease([currentScale[3]+octave, currentScale[5]+octave, currentScale[0]+(octave+1)], "4n");
-    currentStep = 0;
+		if(currentMode == "live"){
+    	chordSynth.triggerAttackRelease([currentScale[3]+octave, currentScale[5]+octave, currentScale[0]+(octave+1)], "4n");
+		} else {
+			chordSynthRecorded.triggerAttackRelease([currentScale[3]+octave, currentScale[5]+octave, currentScale[0]+(octave+1)], "4n");
+		}
+		currentStep = 0;
     if(octave > octaveFloor){
       octave = octave - 1;
     }
@@ -334,46 +353,74 @@ function playChord(){
   } else {
     currentChord = 1;
   }
-
-
 }
-
 
 function bendSynthFunction(scrollHeight){
   if(bendingActive == 0){
     console.log("starting scroll synth");
 
       if(currentChord == 1){
-        bendSynth.triggerAttack(currentScale[2]+octave, now);
+				if(currentMode == "live"){
+					bendSynth.triggerAttack(currentScale[2]+octave, now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[2]+octave, now);
+				}
       }
       if(currentChord == 2){
-        bendSynth.triggerAttack(currentScale[6]+octave, now);
+				if(currentMode == "live"){
+        	bendSynth.triggerAttack(currentScale[6]+octave, now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[6]+octave, now);
+				}
       }
 
       if(currentChord == 3){
-        bendSynth.triggerAttack(currentScale[5]+octave, now);
+				if(currentMode == "live"){
+        	bendSynth.triggerAttack(currentScale[5]+octave, now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[5]+octave, now);
+				}
       }
 
       if(currentChord == 4){
-        bendSynth.triggerAttack(currentScale[0]+(octave+1), now);
+				if(currentMode == "live"){
+        	bendSynth.triggerAttack(currentScale[0]+(octave+1), now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[0]+(octave+1), now);
+				}
       }
 
       if(currentChord == 5){
-        bendSynth.triggerAttack(currentScale[2]+octave, now);
+				if(currentMode == "live"){
+        	bendSynth.triggerAttack(currentScale[2]+octave, now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[2]+octave, now);
+				}
       }
+
       if(currentChord == 6){
-        bendSynth.triggerAttack(currentScale[6]+octave, now);
+				if(currentMode == "live"){
+        	bendSynth.triggerAttack(currentScale[6]+octave, now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[6]+octave, now);
+				}
       }
 
       if(currentChord == 7){
-        bendSynth.triggerAttack(currentScale[0]+(octave+1), now);
+				if(currentMode == "live"){
+        	bendSynth.triggerAttack(currentScale[0]+(octave+1), now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[0]+(octave+1), now);
+				}
       }
 
       if(currentChord == 8){
-        bendSynth.triggerAttack(currentScale[5]+octave, now);
+				if(currentMode == "live"){
+        	bendSynth.triggerAttack(currentScale[5]+octave, now);
+				} else {
+					bendSynthRecorded.triggerAttack(currentScale[5]+octave, now);
+				}
       }
-
-
   }
 
   bendingActive = 25;
@@ -422,38 +469,33 @@ function shiftBendActiveTowardsZero(){
 
 function playbackRecording(){
 	//stops recoding
-
+	if(recorder.state = "started"){
+		recorder.stop();
+	} else {
+		alert("no recording has been made yet!");
+	}
 	//plays recording
 	console.log("playing recording");
 
-
-	const recording = recorder.stop();
-	const url = URL.createObjectURL(recording);
-	const anchor = document.createElement("a");
-	anchor.download("recording.webm");
-	anchor.href = url;
-	anchor.click;
+	//
+	// const recording = recorder.stop();
+	// const url = URL.createObjectURL(recording);
+	// const anchor = document.createElement("a");
+	// anchor.download("recording.webm");
+	// anchor.href = url;
+	// anchor.click;
 }
 
-
-
 var intervalID = setInterval(shiftBendCounterTowardsZero, 25);
-
 var intervalID = setInterval(shiftBendActiveTowardsZero, 25);
 
-
-
 function playMouseSynth(mouseX, mouseY){
-
-
   if(mouseCounter < 10){
     mouseCounter++
   } else {
     mouseCounter = 0;
 
-
     if(mouseY < previousY){
-
       //mouse went up
       if(currentStep < 6){
         currentStep++;
@@ -471,7 +513,7 @@ function playMouseSynth(mouseX, mouseY){
       }
 
     } else {
-
+			//mouse went down
       if(currentStep > 0){
         currentStep = currentStep - 1;
         console.log("current step" + currentStep);
@@ -488,13 +530,15 @@ function playMouseSynth(mouseX, mouseY){
       }
     }
 
-
-    mouseSynth.triggerAttackRelease(currentScale[currentStep]+octave, "64n");
+		if(currentMode == "live"){
+			mouseSynth.triggerAttackRelease(currentScale[currentStep]+octave, "64n");
+		} else {
+			mouseSynthRecorded.triggerAttackRelease(currentScale[currentStep]+octave, "64n");
+		}
 
     previousY = mouseY;
 
   }
-
 }
 
 let drumLoop = new Audio("drumLoop.wav");
@@ -521,16 +565,23 @@ function toggleMode(mode){
   if(mode == "history"){
 //record inputs for later playback here
 		console.log('mode is history, listening and recording inputs');
+		drumLoop.muted = true;
     currentMode = "history";
-		recorder.start();
-		console.log("started recording");
+		console.log(recorder.state);
+		if(recorder.state == "stopped" || recorder.state == "paused"){
+			recorder.start();
+			console.log("started recording");
+		}
 
   } else {
 //send inputs
 		console.log('mode is live');
+		drumLoop.muted = false;
     currentMode = "live";
-		recorder.stop();
-		console.log("stopped recording");
+		if(recorder.state == "started"){
+			recorder.stop();
+			console.log("stopped recording");
+		}
   }
 }
 
@@ -538,7 +589,6 @@ chrome.extension.onConnect.addListener(function(port) {
    console.log("Connected .....");
    port.onMessage.addListener(function(msg) {
         // console.log("message recieved: " + msg);
-
 
         if(msg.type == "clickInfo"){
           // console.log('clicked');
@@ -595,6 +645,5 @@ chrome.extension.onConnect.addListener(function(port) {
 				if(msg.type == "historyModePlaybackInfo"){
           playbackRecording();
         }
-
    });
 })
