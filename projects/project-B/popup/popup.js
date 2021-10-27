@@ -127,9 +127,6 @@ window.addEventListener('load', (event) => {
   });
 });
 
-
-
-
 document.getElementById("historyModeButton").style.backgroundColor = "#A9A9A9";
 document.getElementById("drumOnButton").style.backgroundColor = "#A9A9A9";
 document.getElementById("historyModePlaybackButton").style.visibility = "hidden";
