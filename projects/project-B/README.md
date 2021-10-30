@@ -1,14 +1,16 @@
-# Intro
+## Intro
 
 Disrupt the void that is the eternal silence of the browser.  
 
 For my Project B I created a Chrome extension called SwipeySynth. It sonifies browser activity.
 
-# Concept
+Here is a link to the download: https://github.com/twaugh99/abc-student-repo/blob/master/projects/swipeySynth.zip
+
+## Concept
 
 The initial idea for SwipeySynth came to me when I was looking through Chino's 100 days of browser extensions and I saw one called "trackpad poetry." Even though in his extension it didn't actually use trackpad inputs, it got me thinking about how versatile the trackpad can be for inputs. It is much more sensitive and intricate than any of the other ways to send information to your computer. This program was going to receive inputs and then output something, and I thought trackpad inputs would be very conducive to an engaging user experience.
 
-# Features
+## Features
 
 The sound the extension makes is controlled primarily by three gestures.
 
@@ -25,10 +27,12 @@ Here is a screenshot of the control panel.
 ![alt text](https://raw.githubusercontent.com/twaugh99/abc-student-repo/master/projects/project-B/ssforReadme.png)
 
 
-# Technical Explanation
+## Technical Explanation
 
 Essentially, the meat of this project takes place in the background script. The background script waits for inputs from the content script and waits for user settings from the popup script. The scripts send messages with a type and some form of secondary information related to the parameter it is controlling. Functions would sort through this information and send the information to smaller more specialized functions which would create the sounds.
 
 This project creates sounds using the Tone.js library. This library allows for synths to be defined and manipulated with javascript.
 
 The storage Chrome API was also used for this project to store user preferences after the controls popup window was closed.
+
+Here is a link to the download: https://github.com/twaugh99/abc-student-repo/blob/master/projects/swipeySynth.zip
