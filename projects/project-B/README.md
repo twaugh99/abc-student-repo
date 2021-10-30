@@ -22,7 +22,7 @@ So those are the synths and trackpad controls of the program. There are a few mo
 
 Here is a screenshot of the control panel.
 
-![Control Panel]("ssforReadme.png")
+![alt text](https://raw.githubusercontent.com/twaugh99/abc-student-repo/master/projects/project-B/ssforReadme.png)
 
 
 # Technical Explanation
