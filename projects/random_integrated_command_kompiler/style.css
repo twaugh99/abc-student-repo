@@ -1,0 +1,25 @@
+#glitterText1, #glitterText2, #glitterText3 {
+  position: absolute;
+}
+
+body{
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  background-color: black;
+}
+
+#mainVideo{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#drum1Gif, #drum2Gif, #drum3Gif, #elvisGif, #piano1Gif, #piano2Gif, #piano3Gif, #trumpetGif, #trumpetPlayerGif{
+  position: absolute;
+  width: 300px;
+  height: 300px;
+}
