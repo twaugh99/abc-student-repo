@@ -1,5 +1,6 @@
 let videoStarted = 0;
 
+
 video = document.getElementById("mainVideo");
 mainVideo.width = screen.width;
 mainVideo.height = screen.height;
@@ -29,6 +30,8 @@ piano2Gif.style.visibility = "hidden";
 piano3Gif.style.visibility = "hidden";
 trumpetGif.style.visibility = "hidden";
 trumpetPlayerGif.style.visibility = "hidden";
+
+midiAudio = document.getElementById("midiAudioHTMLObject");
 
 document.body.addEventListener('mousemove', e =>{
   // console.log(e.screenX);
@@ -115,6 +118,8 @@ document.getElementById("mainVideo").addEventListener("click", ()=>{
       videoStarted = 1;
       video.currentTime = 1;
       video.play();
-      setTimeout(() => {MIDIjs.play('nevergonnagiveuup.mid');}, 400);
+      setTimeout(() => {midiAudio.play();}, 400);
+
+      // setTimeout(() => {MIDIjs.play('nevergonnagiveuup.mid');}, 400);
     }
 })
