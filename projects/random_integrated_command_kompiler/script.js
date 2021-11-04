@@ -113,13 +113,19 @@ document.body.addEventListener('mousemove', e =>{
   }
 })
 
+// var playPromise = document.querySelector('video');
+// https://stackoverflow.com/questions/37674223/domexception-failed-to-load-because-no-supported-source-was-found/43434754
+
 document.getElementById("mainVideo").addEventListener("click", ()=>{
     if(videoStarted == 0){
       videoStarted = 1;
       video.currentTime = 1;
       video.play();
-      setTimeout(() => {midiAudio.play();}, 400);
+      // setTimeout(() => {playPromise.play();}, 400);
 
-      // setTimeout(() => {MIDIjs.play('nevergonnagiveuup.mid');}, 400);
+
+      // setTimeout(() => {midiAudio.play();}, 400);
+
+      setTimeout(() => {MIDIjs.play('nevergonnagiveuup.mid');}, 400);
     }
 })
