@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+
+    <div id="stage1Div">
+      <div id="headerDiv">
+        <h1>-Simon Says-</h1>
+        <div id="instructionsDiv">
+          <h2>Instructions:</h2>
+          <h3>Must have at least 3 players to begin.</h3>
+          <!-- <h3 id="onlineCounter">No players are currently online.</h3> -->
+          <h3>The first player to join starts as Simon.</h3>
+          <h3>Simon can press any letter or number on their keyboard.</h3>
+          <h3>The letter or number they chose will show up on the screens of the other players.</h3>
+          <h3>Whichever player presses their corresponding key first scores a point.</h3>
+          <h3>The first player to score 3 points becomes Simon.</h3>
+        </div>
+      </div>
+      <div id="nameDiv">
+        <input autocomplete="off" type="text" id="namebox" placeholder="What is your name?">
+        <button id="button">Start Game</button>
+      </div>
+    </div>
+
+    <div id="stage2Div">
+      <div id="stage2HeaderDiv">
+        <h1 id="stage2HeaderText">Waiting for Players</h1>
+        <button id="startGameButton">Start Game</button>
+      </div>
+      <div id="stage2InfoDiv">
+        <h2 id="playerCounterText">No players are currently online</h2>
+        <div id="playersList">
+        </div>
+      </div>
+    </div>
+
+    <div id="stage3Div">
+      <div id="scoreboardDiv">
+        <div id="scoreboardHeadingsDiv">
+          <h2>Scoreboard:</h2>
+        </div>
+        <div id="scoreboardContentDiv">
+        </div>
+      </div>
+      <div id="canvasDiv">
+      </div>
+      <div id="popupsDiv">
+      </div>
+      <div id="simonInstructionsDiv">
+        <h2 id="simonInstructionsText">Press any number or letter key</h2>
+      </div>
+      <div id="playerInstructionsDiv">
+        <h2 id="playerInstructionsText">When a letter or number pops up on your screen, press your corresponding key as fast as possible to score.</h2>
+        <h2 id="simonCommandObject"></h2>
+      </div>
+    </div>
+
+    <script src="script.js" charset="utf-8"></script>
+  </body>
+</html>

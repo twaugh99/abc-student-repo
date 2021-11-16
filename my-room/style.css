@@ -1,76 +1,45 @@
-#headerText{
-  /* padding-top: 5%; */
-  text-align: center;
-}
-
-#sliderAndLinkDiv{
-  padding-top: 20px;
-  padding-bottom: 10%;
-  text-align: center;
-}
-
-#icon{
-  height: 200px;
-}
-
-#icon:hover{
-  cursor: pointer;
-}
-
-#imageDiv{
-  padding-top: 30px;
-  /* padding-bottom: 15px; */
-
-  margin-top: 20px;
-
-}
-
-h1{
-  margin-top: 60px;
-  font-size: 50px;
-  font-family: Papyrus,fantasy;
-  color: white;
-  text-decoration: underline;
-  margin-bottom: 0px;
-}
-
-h2{
-
-  font-size: 20px;
-  font-family: Papyrus,fantasy;
-  color: white;
-
-}
-
-a{
-  font-size: 40px;
-  font-family: Papyrus,fantasy;
-  color: white;
-  outline-color: white;
-  /* border: 3px; */
-  /* border-style: double; */
-}
-
-p{
-  font-size: 20px;
-  font-family: Papyrus,fantasy;
-  color: white;
-  outline-color: white;
-  /* border: 3px; */
-  /* border-style: double; */
-}
-
-a:hover {
-}
-
-#glitterGif{
-  margin-top: 50px;
-}
-input[type=range]{
-  width: 1200px;
-}
-
-
 body{
-  background-color: #551A8B;
+  /* background-color: tan; */
+  width: 100vh;
+  height: 100vh;
+  background-image: linear-gradient(lightblue, purple);
+  margin: 0;
+}
+
+.miniProject{
+  height: 100px;
+  border: 5px solid black;
+}
+
+.miniProject:hover{
+  border: 5px solid black;
+  transition: border .75s;
+}
+
+.bigProject{
+  height: 160px;
+  border: 8px solid black;
+}
+
+.bigProject:hover{
+  border: 8px solid black;
+  transition: border .75s;
+}
+
+#bigANDminiProjectsDiv{
+  margin-top: 5%;
+  text-align: center;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+
+img{
+  opacity: 50%;
+}
+
+img:hover{
+  opacity: 100%;
+  transition: opacity 1s;
+  cursor:pointer;
 }

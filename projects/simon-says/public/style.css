@@ -1,0 +1,124 @@
+body{
+  background-color: #56b7ff;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, button, #namebox{
+  font-family: 'Courier New', monospace;
+}
+
+h1{
+  margin-top: 0vh;
+  font-size: 8vh;
+  opacity: 85%;
+  /* margin-top: 4vh; */
+  margin-bottom: 0vh;
+}
+
+h2{
+  opacity: 85%;
+  font-size: 3.5vh;
+  /* margin-top: 4vh; */
+  /* margin-bottom: 0vh; */
+}
+
+h3{
+  /* margin-top: 3vh; */
+  /* margin-bottom: 3vh; */
+  font-size: 2.5vh;
+  opacity: 75%;
+}
+
+h3:hover{
+  opacity: 100%;
+  transition: "opacity" 2s;
+}
+
+h5{
+  margin-top: 3vh;
+  margin-bottom: 0;
+  font-size: 7vh;
+  opacity: 75%;
+}
+
+h6{
+  font-size: 5vh;
+}
+
+#headerDiv{
+  text-align: center;
+  margin-top: 2.5%;
+  padding-top: 1.5vh;
+  border: 2vh solid black;
+  border-radius: 5vh;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+#nameDiv{
+  text-align: center;
+  margin-top: 1%;
+  /* width: 100vh; */
+  border: 2vh solid black;
+  border-radius: 5vh;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 0;
+}
+
+
+#namebox{
+  text-align: center;
+  width: 80%;
+  height: 5%;
+  font-size: 3vh;
+  border: .5vh solid black;
+  border-radius: 5vh;
+  margin: 0;
+  padding: 2vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+
+}
+
+#button, #startGameButton{
+  margin: 0;
+  width: 50%;
+  height: 5%;
+  font-size: 3vh;
+  border: .5vh solid black;
+  border-radius: 5vh;
+  background-color: #3bdbff;
+  padding: .5vh;
+  margin-bottom: 2vh;
+}
+
+#startGameButton{
+  margin-top: 2%;
+}
+
+#instructionsDiv{
+  margin-bottom: 0;
+  padding-bottom: 1.5vh;
+  padding-left: 1.5vh;
+  padding-right: 1.5vh;
+}
+
+#stage2HeaderDiv{
+  text-align: center;
+  margin-top: 3.5%;
+}
+
+#stage2InfoDiv{
+  text-align: center;
+  margin-top: 3.5%;
+}
+
+#simonInstructionsDiv, #playerInstructionsDiv, #scoreboardDiv{
+  text-align: center;
+}
+
+
+#simonCommandObject{
+  font-size: 30vh;
+}
