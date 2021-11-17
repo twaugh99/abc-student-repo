@@ -51,14 +51,16 @@ img{
   opacity: 60%;
   padding: 0;
   margin: 0;
-  box-shadow: 0px 0px 0px 0px black;
+  box-shadow: 0px 0px 0px 0px white;
+  z-index: 1;
 }
 
 img:hover{
+  z-index: 100;
   opacity: 100%;
-  box-shadow: 2px 2px 10px 10px white;
+  box-shadow: 0px 0px 100px 10px white;
   transition: opacity .4s;
-  transition: box-shadow: .4s;
+  transition: box-shadow .8s;
   cursor:pointer;
 }
 
@@ -66,6 +68,7 @@ img:hover{
   color: white;
   margin: 0;
   margin-top: 4%;
+  z-index: 101;
 }
 
 #welcomeText{
