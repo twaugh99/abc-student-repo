@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+  </head>
+  <body>
+
+    <div id="welcomeDiv">
+      <h1>Welcome to ServerJam!</h1>
+      <h3>ServerJam is a socket-based website where users can make music together online.</h3>
+      <h3>There are two roles: Synth and Drum</h3>
+      <h3>The Synth role controls a synth clicking around the canvas.</h3>
+      <h3>The Synth role can play chords by holding space when clicking.</h3>
+      <h3>Don't click too fast in Synth mode because this program uses a buffering system for notes.</h3>
+      <h3>The Drum role can play the drums by pressing keys A-K.</h3>
+      <h3>There are three different rooms which have different sound presets.</h3>
+      <h3>Users can only interact with other users in the same room.</h3>
+      <h3>Users can use the chatbox to communicate with their "bandmate."</h3>
+      <h3>Users can change rooms at any time.</h3>
+
+      <div id="nameDiv">
+        <input autocomplete="off" type="text" id="namebox" placeholder="What is your name?">
+        <button id="button">Start Game</button>
+      </div>
+    </div>
+
+    <div id="serverDiv">
+      <h1>Choose a Room:</h1>
+      <div id="roomIconsDiv">
+        <div id="orchestraRoomDiv">
+          <img src="assets/roomIcons/orchestra.png" id="orchestraIcon"></img>
+          <h3 id="orchestraRoomPlayerCountText">Orchestra Room: (0/2)</h3>
+          <div id="orchestraRoomActivePlayersDiv">
+          </div>
+        </div>
+
+
+        <div id="rockRoomDiv">
+          <img src="assets/roomIcons/rock.png" id="rockIcon"></img>
+          <h3 id="rockRoomPlayerCountText">Rock & Roll Room: (0/2)</h3>
+          <div id="rockRoomActivePlayersDiv">
+          </div>
+        </div>
+
+        <div id="electronicRoomDiv">
+          <img src="assets/roomIcons/electronic.png" id="electronicIcon"></img>
+          <h3 id="electronicRoomPlayerCountText">Electronic Room: (0/2)</h3>
+          <div id="electronicRoomActivePlayersDiv">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lobbyDiv">
+      <h2>Lobby:</h2>
+      <div id="lobbyActivePlayersDiv">
+      </div>
+    </div>
+
+
+    <div id="canvasDiv">
+      <h1 id="currentRoomText"></h1>
+
+      <div id="leftCanvasDiv">
+        <div id="chatBoxDiv">
+          <h5>Chat:</h5>
+          <div id="chatbox">
+            <ul id="chat">
+                <!-- <li><p><span class="sender">Sender: </span>Message</p></li> -->
+            </ul>
+          </div>
+          <div id="messagebox">
+            <input autocomplete="off" type="text" id="message" placeholder=""> <button id="send">Send</button>
+          </div>
+        </div>
+
+        <div id="inRoomDiv">
+          <h5>In Room:</h5>
+          <div id="playersInMyRoomDiv">
+          </div>
+          <button id="leaveRoomButton">Change Room</button>
+        </div>
+
+      </div>
+
+
+      <div id="middleCanvasDiv">
+        <div id="canvasOnlyDiv">
+        </div>
+      </div>
+
+
+      <div id="rightCanvasDiv">
+        <div id="selectRoleDiv">
+          <h5>Role:</h5>
+          <div id="selectRoleButtonsDiv">
+            <button id="synthRoleButton" class="selectRoleButton">Synth</button>
+            <button id="drumRoleButton" class="selectRoleButton">Drums</button>
+          </div>
+        </div>
+        <div id="synthControlsDiv">
+
+          <h5>Synth Settings:</h5>
+          <div id="orchestraSlidersDiv">
+            <div id="orchestraShortReleaseSliderDiv">
+              <h6>Melody Release</h6>
+              <input type="range" min="200" max="5000" value="1000" id="orchestraShortReleaseSlider">
+            </div>
+            <div id="orchestraLongReleaseSliderDiv">
+              <h6>Chord Release</h6>
+              <input type="range" min="200" max="5000" value="2000" id="orchestraLongReleaseSlider">
+            </div>
+          </div>
+          <div id="rockSlidersDiv">
+            <div id="rockShortReleaseSliderDiv">
+              <h6>Melody Release</h6>
+              <input type="range" min="200" max="5000" value="1000" id="rockShortReleaseSlider">
+            </div>
+            <div id="rockLongReleaseSliderDiv">
+              <h6>Chord Release</h6>
+              <input type="range" min="200" max="5000" value="2000" id="rockLongReleaseSlider">
+            </div>
+          </div>
+          <div id="electronicSlidersDiv">
+            <div id="electronicShortReleaseSliderDiv">
+              <h6>Melody Release</h6>
+              <input type="range" min="200" max="5000" value="1000" id="electronicShortReleaseSlider">
+            </div>
+            <div id="electronicLongReleaseSliderDiv">
+              <h6>Chord Release</h6>
+              <input type="range" min="200" max="5000" value="2000" id="electronicLongReleaseSlider">
+            </div>
+          </div>
+
+        </div>
+        <div id="drumControlsDiv">
+          <h5>Drum Settings:</h5>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+    </div>
+    <script src="soundfont-player.js"></script>
+
+    <script src="script.js" charset="utf-8"></script>
+
+  </body>
+</html>
