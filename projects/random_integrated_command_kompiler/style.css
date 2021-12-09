@@ -9,6 +9,7 @@ body{
   margin-bottom: 0px;
   background-color: black;
   overflow: hidden;
+  cursor: none;
 }
 
 #mainVideo{
