@@ -33,7 +33,7 @@ trumpetPlayerGif.style.visibility = "hidden";
 
 midiAudio = document.getElementById("midiAudioHTMLObject");
 
-
+let offset = 200;
 
 document.body.addEventListener('mousemove', e =>{
   // console.log(e.screenX);
@@ -56,59 +56,59 @@ document.body.addEventListener('mousemove', e =>{
     glitterText1.style.left = e.screenX+"px";
     glitterText1.style.top = e.screenY+"px";
 
-    let glitterText2X = e.screenX + 50;
+    let glitterText2X = e.screenX + 50 - offset;
     let glitterText2Y = e.screenY + 50;
 
     glitterText2.style.left = glitterText2X+"px";
     glitterText2.style.top = glitterText2Y+"px";
 
-    let glitterText3X = e.screenX - 50;
+    let glitterText3X = e.screenX - 50 - offset;
     let glitterText3Y = e.screenY - 50;
 
     glitterText3.style.left = glitterText3X+"px";
     glitterText3.style.top = glitterText3Y+"px";
 
-    let drum1GifX = e.screenX - 150;
+    let drum1GifX = e.screenX - 150 - offset;
     let drum1GifY = e.screenY - 350;
     drum1Gif.style.left = drum1GifX+"px";
     drum1Gif.style.top = drum1GifY+"px";
 
-    let drum2GifX = e.screenX + 380;
+    let drum2GifX = e.screenX + 380 - offset;
     let drum2GifY = e.screenY + 120;
     drum2Gif.style.left = drum2GifX+"px";
     drum2Gif.style.top = drum2GifY+"px";
 
-    let drum3GifX = e.screenX - 150;
+    let drum3GifX = e.screenX - 150 - offset;
     let drum3GifY = e.screenY + 70;
     drum3Gif.style.left = drum3GifX+"px";
     drum3Gif.style.top = drum3GifY+"px";
 
-    let elvisGifX = e.screenX + 100;
+    let elvisGifX = e.screenX + 100 - offset;
     let elvisGifY = e.screenY - 350;
     elvisGif.style.left = elvisGifX+"px";
     elvisGif.style.top = elvisGifY+"px";
 
-    let piano1GifX = e.screenX + 400;
+    let piano1GifX = e.screenX + 400 - offset;
     let piano1GifY = e.screenY - 300;
     piano1Gif.style.left = piano1GifX+"px";
     piano1Gif.style.top = piano1GifY+"px";
 
-    let piano2GifX = e.screenX + 80;
+    let piano2GifX = e.screenX + 80 - offset;
     let piano2GifY = e.screenY + 100;
     piano2Gif.style.left = piano2GifX+"px";
     piano2Gif.style.top = piano2GifY+"px";
 
-    let piano3GifX = e.screenX - 360;
+    let piano3GifX = e.screenX - 360 - offset;
     let piano3GifY = e.screenY + 50;
     piano3Gif.style.left = piano3GifX+"px";
     piano3Gif.style.top = piano3GifY+"px";
 
-    let trumpetGifX = e.screenX + 660;
+    let trumpetGifX = e.screenX + 660 - offset;
     let trumpetGifY = e.screenY - 20;
     trumpetGif.style.left = trumpetGifX+"px";
     trumpetGif.style.top = trumpetGifY+"px";
 
-    let trumpetPlayerGifX = e.screenX - 360;
+    let trumpetPlayerGifX = e.screenX - 360 - offset;
     let trumpetPlayerGifY = e.screenY - 300;
     trumpetPlayerGif.style.left = trumpetPlayerGifX+"px";
     trumpetPlayerGif.style.top = trumpetPlayerGifY+"px";
@@ -130,10 +130,10 @@ document.getElementById("mainVideo").addEventListener("click", ()=>{
 
       // setTimeout(() => {MIDIjs.play('nevergonnagiveuup.mid');}, 400);
 
-      MIDIjs.play('nevergonnagiveuup.mid');
+      // MIDIjs.play('nevergonnagiveuup.mid');
     }
 })
 
-midiAudio.addEventListener('canplay', ()=>{
-  console.log('midi audio loaded');
-});
+// midiAudio.addEventListener('canplay', ()=>{
+//   console.log('midi audio loaded');
+// });
