@@ -19,6 +19,58 @@ let rockRoomPlayersIDs = [];
 let electronicRoomPlayers = [];
 let electronicRoomPlayersIDs = [];
 
+let orchestraMelodyVolume;
+let orchestraChordVolume;
+let rockMelodyVolume;
+let rockChordVolume;
+let electronicMelodyVolume;
+let electronicChordVolume;
+let orchestraMelodyRelease;
+let orchestraChordRelease;
+let rockMelodyRelease;
+let rockChordRelease;
+let electronicMelodyRelease;
+let electronicChordRelease;
+let drum1orchestra;
+let drum2orchestra;
+let drum3orchestra;
+let drum4orchestra;
+let drum5orchestra;
+let drum6orchestra;
+let drum7orchestra;
+let drum8orchestra;
+let drum1rock;
+let drum2rock;
+let drum3rock;
+let drum4rock;
+let drum5rock;
+let drum6rock;
+let drum7rock;
+let drum8rock;
+let drum1electronic;
+let drum2electronic;
+let drum3electronic;
+let drum4electronic;
+let drum5electronic;
+let drum6electronic;
+let drum7electronic;
+let drum8electronic;
+
+let orchestraSynthTaken;
+let orchestraDrumTaken;
+let rockSynthTaken;
+let rockDrumTaken;
+let electronicSynthTaken;
+let electronicDrumTaken;
+
+
+let orchestraSynthPlayerID;
+let orchestraDrumPlayerID;
+let rockSynthPlayerID;
+let rockDrumPlayerID;
+let electronicSynthPlayerID;
+let electronicDrumPlayerID;
+
 
 io.on('connection', (socket)=>{
   console.log('a player connected', socket.id);
@@ -30,6 +82,62 @@ io.on('connection', (socket)=>{
   io.emit("electronicRoomPlayersIDs", electronicRoomPlayersIDs);
   io.emit("activePlayers", activePlayers);
   io.emit("activePlayersIDs", activePlayersIDs);
+
+
+  if(orchestraSynthTaken != null){
+    io.emit("orchestraSynthTaken", orchestraSynthTaken);
+  }
+
+  if(orchestraDrumTaken != null){
+    io.emit("orchestraDrumTaken", orchestraDrumTaken);
+  }
+
+  if(rockSynthTaken != null){
+    io.emit("rockSynthTaken", rockSynthTaken);
+  }
+
+  if(rockDrumTaken != null){
+    io.emit("rockDrumTaken", rockDrumTaken);
+  }
+
+  if(electronicSynthTaken != null){
+    io.emit("electronicSynthTaken", electronicSynthTaken);
+  }
+
+  if(electronicDrumTaken != null){
+    io.emit("electronicDrumTaken", electronicDrumTaken);
+  }
+
+  if(orchestraMelodyRelease != null){
+    io.emit("orchestraShortReleaseSliderValue", orchestraMelodyRelease*1000);
+    io.emit("orchestraShortRelease", orchestraMelodyRelease);
+  }
+
+  if(orchestraChordRelease != null){
+    io.emit("orchestraLongReleaseSliderValue", orchestraChordRelease*1000);
+    io.emit("orchestraLongRelease", orchestraChordRelease);
+  }
+
+  if(rockMelodyRelease != null){
+    io.emit("rockShortReleaseSliderValue", rockMelodyRelease*1000);
+    io.emit("rockShortRelease", rockMelodyRelease);
+  }
+
+  if(rockChordRelease != null){
+    io.emit("rockLongReleaseSliderValue", rockChordRelease*1000);
+    io.emit("rockLongRelease", rockChordRelease);
+  }
+
+  if(electronicMelodyRelease != null){
+    io.emit("electronicShortReleaseSliderValue", electronicMelodyRelease*1000);
+    io.emit("electronicShortRelease", electronicMelodyRelease);
+  }
+
+  if(rockChordRelease != null){
+    io.emit("electronicLongReleaseSliderValue", electronicChordRelease*1000);
+    io.emit("electronicLongRelease", electronicChordRelease);
+  }
+
 
   socket.on('disconnect', ()=>{
     console.log('a player disconnected', socket.id);
@@ -76,6 +184,37 @@ io.on('connection', (socket)=>{
         io.emit("electronicRoomPlayersIDs", electronicRoomPlayersIDs);
       }
     }
+
+    if(socket.id == orchestraSynthPlayerID){
+      orchestraSynthTaken = false;
+      io.emit("orchestraSynthTaken", false);
+    }
+
+    if(socket.id == orchestraDrumPlayerID){
+      orchestraDrumTaken = false;
+      io.emit("orchestraDrumTaken", false);
+    }
+
+    if(socket.id == rockSynthPlayerID){
+      rockSynthTaken = false;
+      io.emit("rockSynthTaken", false);
+    }
+
+    if(socket.id == rockDrumPlayerID){
+      rockDrumTaken = false;
+      io.emit("rockDrumTaken", false);
+    }
+
+    if(socket.id == electronicSynthPlayerID){
+      electronicSynthTaken = false;
+      io.emit("electronicSynthTaken", false);
+    }
+
+    if(socket.id == electronicDrumPlayerID){
+      electronicDrumTaken = false;
+      io.emit("electronicDrumTaken", false);
+    }
+
   });
   socket.on('name', (name)=>{
     activePlayers.push(name);
@@ -214,29 +353,43 @@ io.on('connection', (socket)=>{
     }
   })
 
-  socket.on('orchestraSynthTaken', (boolean)=>{
+  socket.on('orchestraSynthTakenTOSERVER', (boolean, playerID)=>{
+    orchestraSynthTaken = boolean;
+    orchestraSynthPlayerID = playerID;
+    console.log(orchestraSynthPlayerID);
     io.emit('orchestraSynthTaken', boolean);
   })
 
-  socket.on('orchestraDrumTaken', (boolean)=>{
+  socket.on('orchestraDrumTakenTOSERVER', (boolean, playerID)=>{
+    orchestraDrumTaken = boolean;
+    orchestraDrumPlayerID = playerID;
     io.emit('orchestraDrumTaken', boolean);
   })
 
-  socket.on('rockSynthTaken', (boolean)=>{
+  socket.on('rockSynthTakenTOSERVER', (boolean, playerID)=>{
+    rockSynthTaken = boolean;
+    rockSynthPlayerID = playerID;
     io.emit('rockSynthTaken', boolean);
   })
 
-  socket.on('rockDrumTaken', (boolean)=>{
+  socket.on('rockDrumTakenTOSERVER', (boolean, playerID)=>{
+    rockDrumTaken = boolean;
+    rockDrumPlayerID = playerID;
     io.emit('rockDrumTaken', boolean);
   })
 
-  socket.on('electronicSynthTaken', (boolean)=>{
+  socket.on('electronicSynthTakenTOSERVER', (boolean, playerID)=>{
+    electronicSynthTaken = boolean;
+    electronicSynthPlayerID = playerID;
     io.emit('electronicSynthTaken', boolean);
   })
 
-  socket.on('electronicDrumTaken', (boolean)=>{
+  socket.on('electronicDrumTakenTOSERVER', (boolean, playerID)=>{
+    electronicDrumTaken = boolean;
+    electronicDrumPlayerID = playerID;
     io.emit('electronicDrumTaken', boolean);
   })
+
 
   socket.on('orchestraDrumPlayed', (senderID, number)=>{
     for(let i = 0; i < orchestraRoomPlayersIDs.length; i++){
@@ -361,33 +514,139 @@ io.on('connection', (socket)=>{
   })
 
   socket.on("orchestraShortReleaseSliderChanged", (sliderValue)=>{
+    orchestraMelodyRelease = sliderValue/1000;
     io.emit("orchestraShortReleaseSliderValue", sliderValue);
     io.emit("orchestraShortRelease", sliderValue/1000);
   })
 
   socket.on("orchestraLongReleaseSliderChanged", (sliderValue)=>{
+    orchestraChordRelease = sliderValue/1000;
     io.emit("orchestraLongReleaseSliderValue", sliderValue);
     io.emit("orchestraLongRelease", sliderValue/1000);
   })
 
   socket.on("rockShortReleaseSliderChanged", (sliderValue)=>{
+    rockMelodyRelease = sliderValue/1000;
     io.emit("rockShortReleaseSliderValue", sliderValue);
     io.emit("rockShortRelease", sliderValue/1000);
   })
 
   socket.on("rockLongReleaseSliderChanged", (sliderValue)=>{
+    rockChordRelease = sliderValue/1000;
     io.emit("rockLongReleaseSliderValue", sliderValue);
     io.emit("rockLongRelease", sliderValue/1000);
   })
 
   socket.on("electronicShortReleaseSliderChanged", (sliderValue)=>{
+    electronicMelodyRelease = sliderValue/1000;
     io.emit("electronicShortReleaseSlider", sliderValue);
     io.emit("electronicShortRelease", sliderValue/1000);
   })
 
   socket.on("electronicLongReleaseSliderChanged", (sliderValue)=>{
+    electronicChordRelease = sliderValue/1000;
     io.emit("electronicLongReleaseSlider", sliderValue);
     io.emit("electronicLongRelease", sliderValue/1000);
+  })
+
+
+  socket.on("orchestraDrum1VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum1VolumeSliderChanged", sliderValue);
+  })
+  socket.on("orchestraDrum2VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum2VolumeSliderChanged", sliderValue);
+  })
+  socket.on("orchestraDrum3VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum3VolumeSliderChanged", sliderValue);
+  })
+  socket.on("orchestraDrum4VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum4VolumeSliderChanged", sliderValue);
+  })
+  socket.on("orchestraDrum5VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum5VolumeSliderChanged", sliderValue);
+  })
+  socket.on("orchestraDrum6VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum6VolumeSliderChanged", sliderValue);
+  })
+  socket.on("orchestraDrum7VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum7VolumeSliderChanged", sliderValue);
+  })
+  socket.on("orchestraDrum8VolumeSlider", (sliderValue)=>{
+    io.emit("orchestraDrum8VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum1VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum1VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum2VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum2VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum3VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum3VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum4VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum4VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum5VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum5VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum6VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum6VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum7VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum7VolumeSliderChanged", sliderValue);
+  })
+  socket.on("rockDrum8VolumeSlider", (sliderValue)=>{
+    io.emit("rockDrum8VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum1VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum1VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum2VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum2VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum3VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum3VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum4VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum4VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum5VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum5VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum6VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum6VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum7VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum7VolumeSliderChanged", sliderValue);
+  })
+  socket.on("electronicDrum8VolumeSlider", (sliderValue)=>{
+    io.emit("electronicDrum8VolumeSliderChanged", sliderValue);
+  })
+
+
+
+  socket.on("orchestraMelodyVolumeSliderChanged", (sliderValue)=>{
+    io.emit("orchestraMelodyVolumeSlider", sliderValue);
+  })
+
+  socket.on("orchestraChordVolumeSliderChanged", (sliderValue)=>{
+    io.emit("orchestraChordVolumeSlider", sliderValue);
+  })
+
+  socket.on("rockMelodyVolumeSliderChanged", (sliderValue)=>{
+    io.emit("rockMelodyVolumeSlider", sliderValue);
+  })
+
+  socket.on("rockChordVolumeSliderChanged", (sliderValue)=>{
+    io.emit("rockChordVolumeSlider", sliderValue);
+  })
+
+  socket.on("electronicMelodyVolumeSliderChanged", (sliderValue)=>{
+    io.emit("electronicMelodyVolumeSlider", sliderValue);
+  })
+
+  socket.on("electronicChordVolumeSliderChanged", (sliderValue)=>{
+    io.emit("electronicChordVolumeSlider", sliderValue);
   })
 });
 

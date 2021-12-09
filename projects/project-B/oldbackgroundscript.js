@@ -98,15 +98,11 @@ mouseSynth.volume.value = -30;
 let currentDrumState = "off";
 chrome.storage.sync.get("drumMode", function(obj){
 	 console.log(obj);
-	 if(obj.drumMode == undefined){
-
-		 chrome.storage.sync.set({"drumMode": "off"});
-		 toggleDrums("off");
-
-	 }else if(obj.drumMode == "on") {
+	 if(obj.drumMode == "on") {
 			console.log("current Drum state: " + currentDrumState);
 			toggleDrums("on");
-	 }else if(obj.drumMode == "off") {
+	 }
+	 if(obj.drumMode == "off") {
 			toggleDrums("off");
 	 }
 });
@@ -114,13 +110,11 @@ chrome.storage.sync.get("drumMode", function(obj){
 let currentMode = "live";
 chrome.storage.sync.get("mode", function(obj){
 	 console.log(obj);
-	 if(obj.mode == undefined) {
-	 		chrome.storage.sync.set({"mode": "live"});
-	 		toggleMode("off");
- 	 }else if(obj.mode == "history") {
+	 if(obj.mode == "history") {
 		 	currentMode = "history";
 			toggleMode(currentMode);
-	 }else if(obj.mode == "live") {
+	 }
+	 if(obj.mode == "live") {
 		 	currentMode = "live";
 			toggleMode(currentMode);
 	 }
@@ -128,13 +122,8 @@ chrome.storage.sync.get("mode", function(obj){
 
 let currentVolume = "-30";
 chrome.storage.sync.get("volume", function(obj){
-	if(obj.volume == undefined) {
-		 chrome.storage.sync.set({"volume": -30});
-		 changeVolume(-30);
-	}else{
-		console.log("volume is: " + obj.volume);
- 	 	changeVolume(obj.volume);
-	}
+	 console.log("volume is: " + obj.volume);
+	 changeVolume(obj.volume);
 });
 
 
@@ -165,17 +154,8 @@ let scale_A_Minor = ["A", "B", "C", "D", "E", "F", "G"];
 let scale_Bb_Minor = ["Bb", "C", "Db", "Eb", "F", "Gb", "Ab"];
 let scale_B_Minor = ["B", "C#", "D", "E", "F#", "G", "A"];
 
-let currentScale;
-chrome.storage.sync.get("scale", function(obj){
-	if(obj.scale == undefined) {
-		 chrome.storage.sync.set({"scale": "C_Major"});
-		 changeScale("C_Major");
-	}else{
-		console.log("scale is: " + obj.scale);
- 	 	changeScale(obj.scale);
-	}
+let currentScale = scale_C_Major;
 
-});
 
 function changeScale(scale){
 //I know this part of the code looks terrible, I tried doing it with variables but had a ton of issues because I am working with arrays
@@ -264,23 +244,14 @@ function changeScale(scale){
 }
 
 function changeVolume(volumeFromPopup){
-	if(volumeFromPopup == "-60"){
-		chordSynth.volume.value = -1000;
-		bendSynth.volume.value = -1000;
-		mouseSynth.volume.value = -1000;
+  chordSynth.volume.value = volumeFromPopup;
+  bendSynth.volume.value = volumeFromPopup;
+  mouseSynth.volume.value = volumeFromPopup;
 
-	} else {
-		chordSynth.volume.value = volumeFromPopup;
-		bendSynth.volume.value = volumeFromPopup;
-		mouseSynth.volume.value = volumeFromPopup;
-
-		volumeFromPopup = volumeFromPopup * (-1);
-		newVolume =  ((volumeFromPopup - 0) / (60 - 0) ) * (1 - 0) + 0;
-		newVolume = 1 - newVolume;
-		drumLoop.volume = newVolume;
-
-	}
-	console.log(volumeFromPopup);
+	volumeFromPopup = volumeFromPopup * (-1);
+	newVolume =  ((volumeFromPopup - 0) / (60 - 0) ) * (1 - 0) + 0;
+	newVolume = 1 - newVolume;
+	drumLoop.volume = newVolume;
 }
 
 
@@ -496,24 +467,24 @@ function shiftBendActiveTowardsZero(){
   }
 }
 
-// function playbackRecording(){
-// 	//stops recoding
-// 	if(recorder.state = "started"){
-// 		recorder.stop();
-// 	} else {
-// 		alert("no recording has been made yet!");
-// 	}
-// 	//plays recording
-// 	console.log("playing recording");
-//
-// 	//
-// 	// const recording = recorder.stop();
-// 	// const url = URL.createObjectURL(recording);
-// 	// const anchor = document.createElement("a");
-// 	// anchor.download("recording.webm");
-// 	// anchor.href = url;
-// 	// anchor.click;
-// }
+function playbackRecording(){
+	//stops recoding
+	if(recorder.state = "started"){
+		recorder.stop();
+	} else {
+		alert("no recording has been made yet!");
+	}
+	//plays recording
+	console.log("playing recording");
+
+	//
+	// const recording = recorder.stop();
+	// const url = URL.createObjectURL(recording);
+	// const anchor = document.createElement("a");
+	// anchor.download("recording.webm");
+	// anchor.href = url;
+	// anchor.click;
+}
 
 var intervalID = setInterval(shiftBendCounterTowardsZero, 25);
 var intervalID = setInterval(shiftBendActiveTowardsZero, 25);
@@ -614,145 +585,65 @@ function toggleMode(mode){
   }
 }
 
-let lastMinuteMessage = []
-let playerInterval;
-
-function limitHistoryOneMinute(){
-	let rightNow = new Date().getTime();
-	for(let i = lastMinuteMessage.length - 1; i>=0; i--){
-		let record = lastMinuteMessage[i];
-		let deltaTime = rightNow-record.timestamp;
-		if(deltaTime>60000){
-			lastMinuteMessage.splice(i, 1)
-		}
-	}
-}
-
-function resetHistoryPlay(){
-	lastMinuteMessage = lastMinuteMessage.map(item=>{
-		time.played = false;
-		return item;
-	})
-}
-
-function stopPlayer(){
-	clearInterval(playerInterval);
-}
-
-
-let time = 0;
-
-
-function playbackRecording(){
-	// .. make sure its nly the last minute
-	console.log('playing back recording');
-	limitHistoryOneMinute();
-	resetHistoryPlay();
-
-	let timeAtStartOfReplay = new Date().getTime();
-	let oneMinuteAgo = timeAtStartOfReplay - 60000;
-	playerInterval = setInterval(()=>{
-		let rightnow = new Date().getTime();
-		let msPassed = rightnow-timeAtStartOfReplay
-		console.log(msPassed);
-
-		let currentPlayTime = oneMinuteAgo + msPassed;
-
-		for(let i = 0; i < lastMinuteMessage.length; i++){
-			let record = lastMinuteMessage[i];
- 			if(record.timestamp < currentPlayTime && record.played == false){
-				record.played = true;
-				console.log("message sent: " + record.message);
-				msgToSound(record.message);
-			}
-		}
-
-		if(msPassed > 61000){
-			console.log('playback complete');
-			stopPlayer();
-		}
-	}, 1)
-
-}
-
-
 chrome.extension.onConnect.addListener(function(port) {
    console.log("Connected .....");
    port.onMessage.addListener(function(msg) {
         // console.log("message recieved: " + msg);
-				msgToSound(msg);
-				console.log(msg);
 
-				lastMinuteMessage.push({
-					timestamp: new Date().getTime(),
-					message: msg,
-					played: false
-				})
+        if(msg.type == "clickInfo"){
+          // console.log('clicked');
+          // console.log('clicked mouse x: ' + msg.mouseX);
+          // console.log('clicked mouse y: ' + msg.mouseY);
+          playChord();
+        }
 
-				// console.log(JSON.stringify(lastMinuteMessage[0]) )
-				// console.log('last minute message added: ' + lastMinuteMessage[0].message);
-				// clear out
-				limitHistoryOneMinute();
+        if(msg.type == "mouseInfo"){
+          // console.log('mouse moved:');
+          // console.log('mouse x: ' + msg.mouseX);
+          // console.log('mouse y: ' + msg.mouseY);
+          playMouseSynth(msg.mouseX, msg.mouseY);
+        }
 
+        if(msg.type == "volumeInfo"){
+          console.log('volume: ' + msg.volume);
+          changeVolume(msg.volume);
+        }
+
+
+        if(msg.type == "scaleInfo"){
+          currentScale = msg.scale;
+          console.log('scale: ' + currentScale);
+          changeScale(currentScale);
+        }
+
+        if(msg.type == "scrollInfo"){
+          scrollHeight = msg.scrollHeight;
+          // console.log('scroll height: ' + scrollHeight);
+          bendSynthFunction(scrollHeight);
+        }
+
+        if(msg.type == "drumInfo"){
+          if(msg.state == "on"){
+            console.log("drums are on")
+            toggleDrums("on");
+          } else {
+            console.log("drums are off")
+            toggleDrums("off");
+          }
+        }
+
+        if(msg.type == "modeInfo"){
+          if(msg.mode == "live"){
+            console.log("live mode")
+            toggleMode("live");
+          } else {
+            console.log("history mode")
+            toggleMode("history");
+          }
+        }
+
+				if(msg.type == "historyModePlaybackInfo"){
+          playbackRecording();
+        }
    });
 })
-
-
-function msgToSound(msg){
-	// console.log(JSON.stringify(lastMinuteMessage[0]) )
-	if(msg.type == "clickInfo"){
-		// console.log('clicked');
-		// console.log('clicked mouse x: ' + msg.mouseX);
-		// console.log('clicked mouse y: ' + msg.mouseY);
-		playChord();
-	}
-
-	if(msg.type == "mouseInfo"){
-		// console.log('mouse moved:');
-		// console.log('mouse x: ' + msg.mouseX);
-		// console.log('mouse y: ' + msg.mouseY);
-		playMouseSynth(msg.mouseX, msg.mouseY);
-	}
-
-	if(msg.type == "volumeInfo"){
-		console.log('volume: ' + msg.volume);
-		changeVolume(msg.volume);
-	}
-
-
-	if(msg.type == "scaleInfo"){
-		currentScale = msg.scale;
-		console.log('scale: ' + currentScale);
-		changeScale(currentScale);
-	}
-
-	if(msg.type == "scrollInfo"){
-		scrollHeight = msg.scrollHeight;
-		// console.log('scroll height: ' + scrollHeight);
-		bendSynthFunction(scrollHeight);
-	}
-
-	if(msg.type == "drumInfo"){
-		if(msg.state == "on"){
-			console.log("drums are on")
-			toggleDrums("on");
-		} else {
-			console.log("drums are off")
-			toggleDrums("off");
-		}
-	}
-
-	if(msg.type == "modeInfo"){
-		if(msg.mode == "live"){
-			console.log("live mode")
-			toggleMode("live");
-		} else {
-			console.log("history mode")
-			toggleMode("history");
-		}
-	}
-
-	if(msg.type == "historyModePlaybackInfo"){
-		playbackRecording();
-	}
-}

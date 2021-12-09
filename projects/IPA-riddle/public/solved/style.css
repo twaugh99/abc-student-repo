@@ -1,0 +1,66 @@
+body{
+  background: #ADD8E6;
+}
+
+h1, h2, h3, h4, a, #textBox, button, p{
+  font-family: 'Courier New', monospace;
+}
+
+h1{
+  font-size: 35px;
+  text-decoration: underline;
+}
+
+p{
+  font-size: 25px;
+}
+
+
+h3{
+  font-size: 40px;
+  margin: none;
+}
+
+h4{
+  font-size: 18px;
+}
+
+#IPAkeyDiv{
+  width: 300px;
+  margin: auto;
+}
+
+#left4{
+  float: left;
+}
+
+#right4{
+  float: right;
+}
+
+#topText, #topTextDiv{
+  margin-top: 50px;
+  margin-bottom: none;
+}
+
+#infoDiv, #controlsDiv, #winnersDiv, #topTextDiv{
+  text-align: center;
+}
+
+#controlsDiv{
+  margin-top: 30px;
+}
+
+
+#button{
+  background-color: white;
+  border-color: lightgray;
+  text-decoration-color: white;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  font-size: 25px;
+}
+
+#textbox{
+  font-size: 25px;
+}

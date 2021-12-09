@@ -19,38 +19,335 @@ Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
 Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
 })
 
+let orchestraMelodyVolume = .5;
+let rockMelodyVolume = .5;
+let electronicMelodyVolume = .5;
+let orchestraChordVolume = .5;
+let rockChordVolume = .5;
+let electronicChordVolume = .5;
+
 
 //DRUM KITS
-let drum1orchestra = new Audio("assets/drums/orchestra/tom2.wav");
-let drum2orchestra = new Audio("assets/drums/orchestra/tom1.wav");
-let drum3orchestra = new Audio("assets/drums/orchestra/tambourine.wav");
-let drum4orchestra = new Audio("assets/drums/orchestra/triangle.wav");
-let drum5orchestra = new Audio("assets/drums/orchestra/snare.wav");
-let drum6orchestra = new Audio("assets/drums/orchestra/woodblock1.wav");
-let drum7orchestra = new Audio("assets/drums/orchestra/woodblock2.wav");
-let drum8orchestra = new Audio("assets/drums/orchestra/crash.wav");
-
-let drum1rock = new Audio("assets/drums/rock/kick.wav");
-let drum2rock = new Audio("assets/drums/rock/hihat.wav");
-let drum3rock = new Audio("assets/drums/rock/tom1.wav");
-let drum4rock = new Audio("assets/drums/rock/tom2.wav");
-let drum5rock = new Audio("assets/drums/rock/snare.wav");
-let drum6rock = new Audio("assets/drums/rock/oh.wav");
-let drum7rock = new Audio("assets/drums/rock/ride.wav");
-let drum8rock = new Audio("assets/drums/rock/crash.wav");
-
-let drum1electronic = new Audio("assets/drums/electronic/kick.wav");
-let drum2electronic = new Audio("assets/drums/electronic/perc1.wav");
-let drum3electronic = new Audio("assets/drums/electronic/perc2.wav");
-let drum4electronic = new Audio("assets/drums/electronic/perc3.wav");
-let drum5electronic = new Audio("assets/drums/electronic/clap.wav");
-let drum6electronic = new Audio("assets/drums/electronic/hihat.wav");
-let drum7electronic = new Audio("assets/drums/electronic/snare.wav");
-let drum8electronic = new Audio("assets/drums/electronic/crash.wav");
+let drum1orchestra = new Audio("assets/drums/orchestra/orchestraTom1.wav");
+let drum2orchestra = new Audio("assets/drums/orchestra/orchestraTom2.wav");
+let drum3orchestra = new Audio("assets/drums/orchestra/orchestraTambourine.wav");
+let drum4orchestra = new Audio("assets/drums/orchestra/orchestraTriangle.wav");
+let drum5orchestra = new Audio("assets/drums/orchestra/orchestraSnare.wav");
+let drum6orchestra = new Audio("assets/drums/orchestra/orchestraWoodblock1.wav");
+let drum7orchestra = new Audio("assets/drums/orchestra/orchestraWoodblock2.wav");
+let drum8orchestra = new Audio("assets/drums/orchestra/orchestraCrash.wav");
+drum1orchestra.volume = .5;
+drum2orchestra.volume = .5;
+drum3orchestra.volume = .5;
+drum4orchestra.volume = .5;
+drum5orchestra.volume = .5;
+drum6orchestra.volume = .5;
+drum7orchestra.volume = .5;
+drum8orchestra.volume = .5;
+let drum1rock = new Audio("assets/drums/rock/rockKick.wav");
+let drum2rock = new Audio("assets/drums/rock/rockHihat.wav");
+let drum3rock = new Audio("assets/drums/rock/rockTom1.wav");
+let drum4rock = new Audio("assets/drums/rock/rockTom2.wav");
+let drum5rock = new Audio("assets/drums/rock/rockSnare.wav");
+let drum6rock = new Audio("assets/drums/rock/rockOh.wav");
+let drum7rock = new Audio("assets/drums/rock/rockRide.wav");
+let drum8rock = new Audio("assets/drums/rock/rockCrash.wav");
+drum1rock.volume = .5;
+drum2rock.volume = .5;
+drum3rock.volume = .5;
+drum4rock.volume = .5;
+drum5rock.volume = .5;
+drum6rock.volume = .5;
+drum7rock.volume = .5;
+drum8rock.volume = .5;
+let drum1electronic = new Audio("assets/drums/electronic/electronicKick.wav");
+let drum2electronic = new Audio("assets/drums/electronic/electronicPerc1.wav");
+let drum3electronic = new Audio("assets/drums/electronic/electronicPerc2.wav");
+let drum4electronic = new Audio("assets/drums/electronic/electronicPerc3.wav");
+let drum5electronic = new Audio("assets/drums/electronic/electronicClap.wav");
+let drum6electronic = new Audio("assets/drums/electronic/electronicHihat.wav");
+let drum7electronic = new Audio("assets/drums/electronic/electronicSnare.wav");
+let drum8electronic = new Audio("assets/drums/electronic/electronicCrash.wav");
+drum1electronic.volume = .25;
+drum2electronic.volume = .25;
+drum3electronic.volume = .25;
+drum4electronic.volume = .25;
+drum5electronic.volume = .25;
+drum6electronic.volume = .25;
+drum7electronic.volume = .25;
+drum8electronic.volume = .25;
 
 let orchestraDrums = [drum1orchestra, drum2orchestra, drum3orchestra, drum4orchestra, drum5orchestra, drum6orchestra, drum7orchestra, drum8orchestra]
 let rockDrums = [drum1rock, drum2rock, drum3rock, drum4rock, drum5rock, drum6rock, drum7rock, drum8rock]
 let electronicDrums = [drum1electronic, drum2electronic, drum3electronic, drum4electronic, drum5electronic, drum6electronic, drum7electronic, drum8electronic]
+
+
+let orchestraDrum1VolumeSlider = document.getElementById("orchestraDrum1VolumeSlider");
+
+orchestraDrum1VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum1VolumeSlider", orchestraDrum1VolumeSlider.value);
+})
+
+socket.on("orchestraDrum1VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum1VolumeSlider.value = sliderValue;
+  drum1orchestra.volume = sliderValue/1000;
+})
+
+let orchestraDrum2VolumeSlider = document.getElementById("orchestraDrum2VolumeSlider");
+
+orchestraDrum2VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum2VolumeSlider", orchestraDrum2VolumeSlider.value);
+})
+
+socket.on("orchestraDrum2VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum2VolumeSlider.value = sliderValue;
+  drum2orchestra.volume = sliderValue/1000;
+})
+
+let orchestraDrum3VolumeSlider = document.getElementById("orchestraDrum3VolumeSlider");
+
+orchestraDrum3VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum3VolumeSlider", orchestraDrum3VolumeSlider.value);
+})
+
+socket.on("orchestraDrum3VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum3VolumeSlider.value = sliderValue;
+  drum3orchestra.volume = sliderValue/1000;
+})
+
+let orchestraDrum4VolumeSlider = document.getElementById("orchestraDrum4VolumeSlider");
+
+orchestraDrum4VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum4VolumeSlider", orchestraDrum4VolumeSlider.value);
+})
+
+socket.on("orchestraDrum4VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum4VolumeSlider.value = sliderValue;
+  drum4orchestra.volume = sliderValue/1000;
+})
+
+let orchestraDrum5VolumeSlider = document.getElementById("orchestraDrum5VolumeSlider");
+
+orchestraDrum5VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum5VolumeSlider", orchestraDrum5VolumeSlider.value);
+})
+
+socket.on("orchestraDrum5VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum5VolumeSlider.value = sliderValue;
+  drum5orchestra.volume = sliderValue/1000;
+})
+
+let orchestraDrum6VolumeSlider = document.getElementById("orchestraDrum6VolumeSlider");
+
+orchestraDrum6VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum6VolumeSlider", orchestraDrum6VolumeSlider.value);
+})
+
+socket.on("orchestraDrum6VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum6VolumeSlider.value = sliderValue;
+  drum6orchestra.volume = sliderValue/1000;
+})
+
+let orchestraDrum7VolumeSlider = document.getElementById("orchestraDrum7VolumeSlider");
+
+orchestraDrum7VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum7VolumeSlider", orchestraDrum7VolumeSlider.value);
+})
+
+socket.on("orchestraDrum7VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum7VolumeSlider.value = sliderValue;
+  drum7orchestra.volume = sliderValue/1000;
+})
+
+let orchestraDrum8VolumeSlider = document.getElementById("orchestraDrum8VolumeSlider");
+
+orchestraDrum8VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("orchestraDrum8VolumeSlider", orchestraDrum8VolumeSlider.value);
+})
+
+socket.on("orchestraDrum8VolumeSliderChanged", (sliderValue)=>{
+  orchestraDrum8VolumeSlider.value = sliderValue;
+  drum8orchestra.volume = sliderValue/1000;
+})
+
+
+let rockDrum1VolumeSlider = document.getElementById("rockDrum1VolumeSlider");
+
+rockDrum1VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum1VolumeSlider", rockDrum1VolumeSlider.value);
+})
+
+socket.on("rockDrum1VolumeSliderChanged", (sliderValue)=>{
+  rockDrum1VolumeSlider.value = sliderValue;
+  drum1rock.volume = sliderValue/1000;
+})
+
+let rockDrum2VolumeSlider = document.getElementById("rockDrum2VolumeSlider");
+
+rockDrum2VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum2VolumeSlider", rockDrum2VolumeSlider.value);
+})
+
+socket.on("rockDrum2VolumeSliderChanged", (sliderValue)=>{
+  rockDrum2VolumeSlider.value = sliderValue;
+  drum2rock.volume = sliderValue/1000;
+})
+
+let rockDrum3VolumeSlider = document.getElementById("rockDrum3VolumeSlider");
+
+rockDrum3VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum3VolumeSlider", rockDrum3VolumeSlider.value);
+})
+
+socket.on("rockDrum3VolumeSliderChanged", (sliderValue)=>{
+  rockDrum3VolumeSlider.value = sliderValue;
+  drum3rock.volume = sliderValue/1000;
+})
+
+let rockDrum4VolumeSlider = document.getElementById("rockDrum4VolumeSlider");
+
+rockDrum4VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum4VolumeSlider", rockDrum4VolumeSlider.value);
+})
+
+socket.on("rockDrum4VolumeSliderChanged", (sliderValue)=>{
+  rockDrum4VolumeSlider.value = sliderValue;
+  drum4rock.volume = sliderValue/1000;
+})
+
+let rockDrum5VolumeSlider = document.getElementById("rockDrum5VolumeSlider");
+
+rockDrum5VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum5VolumeSlider", rockDrum5VolumeSlider.value);
+})
+
+socket.on("rockDrum5VolumeSliderChanged", (sliderValue)=>{
+  rockDrum5VolumeSlider.value = sliderValue;
+  drum5rock.volume = sliderValue/1000;
+})
+
+let rockDrum6VolumeSlider = document.getElementById("rockDrum6VolumeSlider");
+
+rockDrum6VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum6VolumeSlider", rockDrum6VolumeSlider.value);
+})
+
+socket.on("rockDrum6VolumeSliderChanged", (sliderValue)=>{
+  rockDrum6VolumeSlider.value = sliderValue;
+  drum6rock.volume = sliderValue/1000;
+})
+
+let rockDrum7VolumeSlider = document.getElementById("rockDrum7VolumeSlider");
+
+rockDrum7VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum7VolumeSlider", rockDrum7VolumeSlider.value);
+})
+
+socket.on("rockDrum7VolumeSliderChanged", (sliderValue)=>{
+  rockDrum7VolumeSlider.value = sliderValue;
+  drum7rock.volume = sliderValue/1000;
+})
+
+let rockDrum8VolumeSlider = document.getElementById("rockDrum8VolumeSlider");
+
+rockDrum8VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("rockDrum8VolumeSlider", rockDrum8VolumeSlider.value);
+})
+
+socket.on("rockDrum8VolumeSliderChanged", (sliderValue)=>{
+  rockDrum8VolumeSlider.value = sliderValue;
+  drum8rock.volume = sliderValue/1000;
+})
+
+let electronicDrum1VolumeSlider = document.getElementById("electronicDrum1VolumeSlider");
+
+electronicDrum1VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum1VolumeSlider", electronicDrum1VolumeSlider.value);
+})
+
+socket.on("electronicDrum1VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum1VolumeSlider.value = sliderValue;
+  drum1electronic.volume = sliderValue/1000;
+})
+
+let electronicDrum2VolumeSlider = document.getElementById("electronicDrum2VolumeSlider");
+
+electronicDrum2VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum2VolumeSlider", electronicDrum2VolumeSlider.value);
+})
+
+socket.on("electronicDrum2VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum2VolumeSlider.value = sliderValue;
+  drum2electronic.volume = sliderValue/1000;
+})
+
+let electronicDrum3VolumeSlider = document.getElementById("electronicDrum3VolumeSlider");
+
+electronicDrum3VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum3VolumeSlider", electronicDrum3VolumeSlider.value);
+})
+
+socket.on("electronicDrum3VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum3VolumeSlider.value = sliderValue;
+  drum3electronic.volume = sliderValue/1000;
+})
+
+let electronicDrum4VolumeSlider = document.getElementById("electronicDrum4VolumeSlider");
+
+electronicDrum4VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum4VolumeSlider", electronicDrum4VolumeSlider.value);
+})
+
+socket.on("electronicDrum4VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum4VolumeSlider.value = sliderValue;
+  drum4electronic.volume = sliderValue/1000;
+})
+
+let electronicDrum5VolumeSlider = document.getElementById("electronicDrum5VolumeSlider");
+
+electronicDrum5VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum5VolumeSlider", electronicDrum5VolumeSlider.value);
+})
+
+socket.on("electronicDrum5VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum5VolumeSlider.value = sliderValue;
+  drum5electronic.volume = sliderValue/1000;
+})
+
+let electronicDrum6VolumeSlider = document.getElementById("electronicDrum6VolumeSlider");
+
+electronicDrum6VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum6VolumeSlider", electronicDrum6VolumeSlider.value);
+})
+
+socket.on("electronicDrum6VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum6VolumeSlider.value = sliderValue;
+  drum6electronic.volume = sliderValue/1000;
+})
+
+let electronicDrum7VolumeSlider = document.getElementById("electronicDrum7VolumeSlider");
+
+electronicDrum7VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum7VolumeSlider", electronicDrum7VolumeSlider.value);
+})
+
+socket.on("electronicDrum7VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum7VolumeSlider.value = sliderValue;
+  drum7electronic.volume = sliderValue/1000;
+})
+
+let electronicDrum8VolumeSlider = document.getElementById("electronicDrum8VolumeSlider");
+
+electronicDrum8VolumeSlider.addEventListener("change", ()=>{
+  socket.emit("electronicDrum8VolumeSlider", electronicDrum8VolumeSlider.value);
+})
+
+socket.on("electronicDrum8VolumeSliderChanged", (sliderValue)=>{
+  electronicDrum8VolumeSlider.value = sliderValue;
+  drum8electronic.volume = sliderValue/1000;
+})
+
+
 
 
 let wheelValue = 0;
@@ -137,7 +434,7 @@ synthRoleButton.addEventListener("click", ()=>{
 
         currentRole = "synth";
         //tell the server that the role has been taken
-        socket.emit("orchestraSynthTaken", true);
+        socket.emit("orchestraSynthTakenTOSERVER", true, sessionID);
       }
     }
     if(currentRoom == "rock"){
@@ -153,7 +450,7 @@ synthRoleButton.addEventListener("click", ()=>{
 
         currentRole = "synth";
         //tell the server that the role has been taken
-        socket.emit("rockSynthTaken", true);
+        socket.emit("rockSynthTakenTOSERVER", true, sessionID);
       }
     }
     if(currentRoom == "electronic"){
@@ -169,7 +466,7 @@ synthRoleButton.addEventListener("click", ()=>{
 
         currentRole = "synth";
         //tell the server that the role has been taken
-        socket.emit("electronicSynthTaken", true);
+        socket.emit("electronicSynthTakenTOSERVER", true, sessionID);
       }
     }
     return;
@@ -180,7 +477,7 @@ synthRoleButton.addEventListener("click", ()=>{
     if(currentRoom == "orchestra"){
       orchestraSynthTaken = false;
       //tell the server that the synth role is open
-      socket.emit("orchestraSynthTaken", false);
+      socket.emit("orchestraSynthTakenTOSERVER", false, sessionID);
     }
     if(currentRoom == "rock"){
       rockSynthTaken = false;
@@ -218,8 +515,8 @@ synthRoleButton.addEventListener("click", ()=>{
         currentRole = "synth";
         //tell the server that the role has been taken
         //tell the server that the other role is now open
-        socket.emit("orchestraSynthTaken", true);
-        socket.emit("orchestraDrumTaken", false);
+        socket.emit("orchestraSynthTakenTOSERVER", true, sessionID);
+        socket.emit("orchestraDrumTakenTOSERVER", false, sessionID);
       }
     }
     if(currentRoom == "rock"){
@@ -240,8 +537,8 @@ synthRoleButton.addEventListener("click", ()=>{
         currentRole = "synth";
         //tell the server that the role has been taken
         //tell the server that the other role is now open
-        socket.emit("rockSynthTaken", true);
-        socket.emit("rockDrumTaken", false);
+        socket.emit("rockSynthTakenTOSERVER", true, sessionID);
+        socket.emit("rockDrumTakenTOSERVER", false, sessionID);
       }
     }
     if(currentRoom == "electronic"){
@@ -262,8 +559,8 @@ synthRoleButton.addEventListener("click", ()=>{
         currentRole = "synth";
         //tell the server that the role has been taken
         //tell the server that the other role is now open
-        socket.emit("electronicSynthTaken", true);
-        socket.emit("electronicDrumTaken", false);
+        socket.emit("electronicSynthTakenTOSERVER", true, sessionID);
+        socket.emit("electronicDrumTakenTOSERVER", false, sessionID);
       }
     }
     return;
@@ -280,12 +577,16 @@ drumRoleButton.addEventListener("click", ()=>{
         orchestraDrumTaken = true;
         drumRoleButton.style.backgroundColor = "white";
         drumRoleButton.style.color = "black";
+
+        orchestraDrumSlidersDiv.style.display = "unset";
+        rockDrumSlidersDiv.style.display = "none";
+        electronicDrumSlidersDiv.style.display = "none";
         drumControlsDiv.style.display = "unset";
         synthControlsDiv.style.display = "none";
 
         currentRole = "drum";
         //tell the server that the role has been taken
-        socket.emit("orchestraDrumTaken", true);
+        socket.emit("orchestraDrumTakenTOSERVER", true, sessionID);
       }
     }
     if(currentRoom == "rock"){
@@ -293,12 +594,15 @@ drumRoleButton.addEventListener("click", ()=>{
         rockDrumTaken = true;
         drumRoleButton.style.backgroundColor = "white";
         drumRoleButton.style.color = "black";
+        orchestraDrumSlidersDiv.style.display = "none";
+        rockDrumSlidersDiv.style.display = "unset";
+        electronicDrumSlidersDiv.style.display = "none";
         drumControlsDiv.style.display = "unset";
         synthControlsDiv.style.display = "none";
 
         currentRole = "drum";
         //tell the server that the role has been taken
-        socket.emit("rockDrumTaken", true);
+        socket.emit("rockDrumTakenTOSERVER", true, sessionID);
       }
     }
     if(currentRoom == "electronic"){
@@ -306,12 +610,15 @@ drumRoleButton.addEventListener("click", ()=>{
         electronicDrumTaken = true;
         drumRoleButton.style.backgroundColor = "white";
         drumRoleButton.style.color = "black";
+        orchestraDrumSlidersDiv.style.display = "none";
+        rockDrumSlidersDiv.style.display = "none";
+        electronicDrumSlidersDiv.style.display = "unset";
         drumControlsDiv.style.display = "unset";
         synthControlsDiv.style.display = "none";
 
         currentRole = "drum";
         //tell the server that the role has been taken
-        socket.emit("electronicDrumTaken", true);
+        socket.emit("electronicDrumTakenTOSERVER", true, sessionID);
       }
     }
     return;
@@ -322,17 +629,17 @@ drumRoleButton.addEventListener("click", ()=>{
     if(currentRoom == "orchestra"){
       orchestraDrumTaken = false;
       //tell the server that the synth role is open
-      socket.emit("orchestraDrumTaken", false);
+      socket.emit("orchestraDrumTakenTOSERVER", false, sessionID);
     }
     if(currentRoom == "rock"){
       rockDrumTaken = false;
       //tell the server that the synth role is open
-      socket.emit("rockDrumTaken", false);
+      socket.emit("rockDrumTakenTOSERVER", false, sessionID);
     }
     if(currentRoom == "electronic"){
       electronicDrumTaken = false;
       //tell the server that the synth role is open
-      socket.emit("electronicDrumTaken", false);
+      socket.emit("electronicDrumTakenTOSERVER", false, sessionID);
     }
     drumRoleButton.style.backgroundColor = "black";
     drumRoleButton.style.color = "white";
@@ -349,14 +656,17 @@ drumRoleButton.addEventListener("click", ()=>{
         drumRoleButton.style.color = "black";
         synthRoleButton.style.backgroundColor = "black";
         synthRoleButton.style.color = "white";
+        orchestraDrumSlidersDiv.style.display = "unset";
+        rockDrumSlidersDiv.style.display = "none";
+        electronicDrumSlidersDiv.style.display = "none";
         drumControlsDiv.style.display = "unset";
         synthControlsDiv.style.display = "none";
 
         currentRole = "drum";
         //tell the server that the role has been taken
         //tell the server that the other role is now open
-        socket.emit("orchestraDrumTaken", true);
-        socket.emit("orchestraSynthTaken", false);
+        socket.emit("orchestraDrumTakenTOSERVER", true, sessionID);
+        socket.emit("orchestraSynthTakenTOSERVER", false, sessionID);
       }
     }
     if(currentRoom == "rock"){
@@ -367,14 +677,17 @@ drumRoleButton.addEventListener("click", ()=>{
         drumRoleButton.style.color = "black";
         synthRoleButton.style.backgroundColor = "black";
         synthRoleButton.style.color = "white";
+        orchestraDrumSlidersDiv.style.display = "none";
+        rockDrumSlidersDiv.style.display = "unset";
+        electronicDrumSlidersDiv.style.display = "none";
         drumControlsDiv.style.display = "unset";
         synthControlsDiv.style.display = "none";
 
         currentRole = "drum";
         //tell the server that the role has been taken
         //tell the server that the other role is now open
-        socket.emit("rockDrumTaken", true);
-        socket.emit("rockSynthTaken", false);
+        socket.emit("rockDrumTakenTOSERVER", true, sessionID);
+        socket.emit("rockSynthTakenTOSERVER", false, sessionID);
       }
     }
     if(currentRoom == "electronic"){
@@ -385,6 +698,9 @@ drumRoleButton.addEventListener("click", ()=>{
         drumRoleButton.style.color = "black";
         synthRoleButton.style.backgroundColor = "black";
         synthRoleButton.style.color = "white";
+        orchestraDrumSlidersDiv.style.display = "none";
+        rockDrumSlidersDiv.style.display = "none";
+        electronicDrumSlidersDiv.style.display = "unset";
         drumControlsDiv.style.display = "unset";
         synthControlsDiv.style.display = "none";
 
@@ -392,8 +708,8 @@ drumRoleButton.addEventListener("click", ()=>{
 
         //tell the server that the role has been taken
         //tell the server that the other role is now open
-        socket.emit("electronicDrumTaken", true);
-        socket.emit("electronicSynthTaken", false);
+        socket.emit("electronicDrumTakenTOSERVER", true, sessionID);
+        socket.emit("electronicSynthTakenTOSERVER", false, sessionID);
 
       }
     }
@@ -456,56 +772,55 @@ let electronicLongRelease = 2;
 let heightMarkers = [0, 50, 100, 150, 200, 250, 300, 350, 400];
 
 
-let octave = 4;
 function playNote(){
   for(let i = 0; i < 8; i++){
     if(mouseY > heightMarkers[i] && mouseY < heightMarkers[i+1]){
       console.log("note " + (i+1));
       if(currentRoom == "orchestra"){
         if(i+1 == 1){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('G4').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 1);
         }
         if(i+1 == 2){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('F4').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 2);
         }
         if(i+1 == 3){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('Eb4').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 3);
         }
         if(i+1 == 4){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('D4').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 4);
         }
         if(i+1 == 5){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('C4').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 5);
         }
         if(i+1 == 6){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('Bb3').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 6);
         }
         if(i+1 == 7){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('A3').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 7);
         }
         if(i+1 == 8){
-          Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+          Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
             french_horn.play('G3').stop(ac.currentTime + orchestraShortRelease);
           })
           socket.emit("orchestraNotePlayed", sessionID, 8);
@@ -514,49 +829,49 @@ function playNote(){
 
       if(currentRoom == "rock"){
         if(i+1 == 1){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('C4').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 1);
         }
         if(i+1 == 2){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('B3').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 2);
         }
         if(i+1 == 3){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('A3').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 3);
         }
         if(i+1 == 4){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('G3').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 4);
         }
         if(i+1 == 5){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('F3').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 5);
         }
         if(i+1 == 6){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('E3').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 6);
         }
         if(i+1 == 7){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('D3').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 7);
         }
         if(i+1 == 8){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('C3').stop(ac.currentTime + rockShortRelease);
           })
           socket.emit("rockNotePlayed", sessionID, 8);
@@ -564,49 +879,49 @@ function playNote(){
       }
       if(currentRoom == "electronic"){
         if(i+1 == 1){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('Eb5').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 1);
         }
         if(i+1 == 2){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('D5').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 2);
         }
         if(i+1 == 3){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('C5').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 3);
         }
         if(i+1 == 4){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('Bb4').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 4);
         }
         if(i+1 == 5){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('Ab4').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 5);
         }
         if(i+1 == 6){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('G4').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 6);
         }
         if(i+1 == 7){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('F4').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 7);
         }
         if(i+1 == 8){
-          Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+          Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
             synth_brass_1.play('Eb4').stop(ac.currentTime + electronicShortRelease);
           })
           socket.emit("electronicNotePlayed", sessionID, 8);
@@ -623,7 +938,7 @@ function playChord(){
       console.log("note " + (i+1));
       if(currentRoom == "orchestra"){
         if(i+1 == 1){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('D5').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('Bb4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('G4').stop(ac.currentTime + orchestraLongRelease);
@@ -631,7 +946,7 @@ function playChord(){
           socket.emit("orchestraChordPlayed", sessionID, 1);
         }
         if(i+1 == 2){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('C5').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('A4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('F4').stop(ac.currentTime + orchestraLongRelease);
@@ -639,7 +954,7 @@ function playChord(){
           socket.emit("orchestraChordPlayed", sessionID, 2);
         }
         if(i+1 == 3){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('Bb4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('G4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('Eb4').stop(ac.currentTime + orchestraLongRelease);
@@ -647,7 +962,7 @@ function playChord(){
           socket.emit("orchestraChordPlayed", sessionID, 3);
         }
         if(i+1 == 4){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('A4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('F4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('D4').stop(ac.currentTime + orchestraLongRelease);
@@ -655,7 +970,7 @@ function playChord(){
           socket.emit("orchestraChordPlayed", sessionID, 4);
         }
         if(i+1 == 5){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('G4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('Eb4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('C4').stop(ac.currentTime + orchestraLongRelease);
@@ -663,7 +978,7 @@ function playChord(){
           socket.emit("orchestraChordPlayed", sessionID, 5);
         }
         if(i+1 == 6){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('F4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('D4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('Bb3').stop(ac.currentTime + orchestraLongRelease);
@@ -671,7 +986,7 @@ function playChord(){
           socket.emit("orchestraChordPlayed", sessionID, 6);
         }
         if(i+1 == 7){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('Eb4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('C4').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('A3').stop(ac.currentTime + orchestraLongRelease);
@@ -679,7 +994,7 @@ function playChord(){
           socket.emit("orchestraChordPlayed", sessionID, 7);
         }
         if(i+1 == 8){
-          Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+          Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
             choir_aahs.play('D3').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('Bb3').stop(ac.currentTime + orchestraLongRelease);
             choir_aahs.play('G3').stop(ac.currentTime + orchestraLongRelease);
@@ -690,7 +1005,7 @@ function playChord(){
 
       if(currentRoom == "rock"){
         if(i+1 == 1){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('G4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('E4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('C4').stop(ac.currentTime + rockLongRelease);
@@ -698,7 +1013,7 @@ function playChord(){
           socket.emit("rockChordPlayed", sessionID, 1);
         }
         if(i+1 == 2){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('F4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('D4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('B3').stop(ac.currentTime + rockLongRelease);
@@ -706,7 +1021,7 @@ function playChord(){
           socket.emit("rockChordPlayed", sessionID, 2);
         }
         if(i+1 == 3){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('E4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('C4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('A3').stop(ac.currentTime + rockLongRelease);
@@ -714,7 +1029,7 @@ function playChord(){
           socket.emit("rockChordPlayed", sessionID, 3);
         }
         if(i+1 == 4){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('D4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('B3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('G3').stop(ac.currentTime + rockLongRelease);
@@ -722,7 +1037,7 @@ function playChord(){
           socket.emit("rockChordPlayed", sessionID, 4);
         }
         if(i+1 == 5){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('C4').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('A3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('F3').stop(ac.currentTime + rockLongRelease);
@@ -730,7 +1045,7 @@ function playChord(){
           socket.emit("rockChordPlayed", sessionID, 5);
         }
         if(i+1 == 6){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('B3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('G3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('E3').stop(ac.currentTime + rockLongRelease);
@@ -738,7 +1053,7 @@ function playChord(){
           socket.emit("rockChordPlayed", sessionID, 6);
         }
         if(i+1 == 7){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('A3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('F3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('D3').stop(ac.currentTime + rockLongRelease);
@@ -746,7 +1061,7 @@ function playChord(){
           socket.emit("rockChordPlayed", sessionID, 7);
         }
         if(i+1 == 8){
-          Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+          Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
             overdriven_guitar.play('G3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('E3').stop(ac.currentTime + rockLongRelease);
             overdriven_guitar.play('C3').stop(ac.currentTime + rockLongRelease);
@@ -756,7 +1071,7 @@ function playChord(){
       }
       if(currentRoom == "electronic"){
         if(i+1 == 1){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('Bb4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('G4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('Eb4').stop(ac.currentTime + electronicLongRelease);
@@ -764,7 +1079,7 @@ function playChord(){
           socket.emit("electronicChordPlayed", sessionID, 1);
         }
         if(i+1 == 2){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('Ab4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('F4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('D4').stop(ac.currentTime + electronicLongRelease);
@@ -772,7 +1087,7 @@ function playChord(){
           socket.emit("electronicChordPlayed", sessionID, 2);
         }
         if(i+1 == 3){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('G4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('Eb4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('C4').stop(ac.currentTime + electronicLongRelease);
@@ -780,7 +1095,7 @@ function playChord(){
           socket.emit("electronicChordPlayed", sessionID, 3);
         }
         if(i+1 == 4){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('F4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('D4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('Bb3').stop(ac.currentTime + electronicLongRelease);
@@ -788,7 +1103,7 @@ function playChord(){
           socket.emit("electronicChordPlayed", sessionID, 4);
         }
         if(i+1 == 5){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('Eb4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('C4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('Ab3').stop(ac.currentTime + electronicLongRelease);
@@ -796,7 +1111,7 @@ function playChord(){
           socket.emit("electronicChordPlayed", sessionID, 5);
         }
         if(i+1 == 6){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('D4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('Bb3').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('G3').stop(ac.currentTime + electronicLongRelease);
@@ -804,7 +1119,7 @@ function playChord(){
           socket.emit("electronicChordPlayed", sessionID, 6);
         }
         if(i+1 == 7){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('C4').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('Ab3').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('F3').stop(ac.currentTime + electronicLongRelease);
@@ -812,7 +1127,7 @@ function playChord(){
           socket.emit("electronicChordPlayed", sessionID, 7);
         }
         if(i+1 == 8){
-          Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+          Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
             pad_3_polysynth.play('Bb3').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('G3').stop(ac.currentTime + electronicLongRelease);
             pad_3_polysynth.play('Eb3').stop(ac.currentTime + electronicLongRelease);
@@ -913,7 +1228,7 @@ document.addEventListener('keydown', function(event) {
     for(let i = 0; i < keyArray.length; i++){
       if(event.code == keyArray[i]){
         playDrum(i, currentRoom)
-        console.log("playing drum" + i);
+        // console.log("playing drum" + i);
       }
       // console.log(i);
     }
@@ -922,7 +1237,7 @@ document.addEventListener('keydown', function(event) {
     if(event.code == 'Space'){
       if(spaceDown == false){
         spaceDown = true;
-        console.log("space key is down");
+        // console.log("space key is down");
       }
     }
   }
@@ -932,7 +1247,7 @@ document.addEventListener('keyup', function(event) {
   if(currentRole == "synth"){
     if(event.code == 'Space'){
       spaceDown = false;
-      console.log("space key is up")
+      // console.log("space key is up")
     }
   }
 });
@@ -1020,15 +1335,15 @@ leaveRoomButton.addEventListener("click", ()=>{
   if(currentRole == "synth"){
     if(currentRoom == "orchestra"){
       orchestraSynthTaken = false;
-      socket.emit("orchestraSynthTaken", false);
+      socket.emit("orchestraSynthTakenTOSERVER", false);
     }
     if(currentRoom == "rock"){
       rockSynthTaken = false;
-      socket.emit("rockSynthTaken", false);
+      socket.emit("rockSynthTakenTOSERVER", false);
     }
     if(currentRoom == "electronic"){
       electronicSynthTaken = false;
-      socket.emit("electronicSynthTaken", false);
+      socket.emit("electronicSynthTakenTOSERVER", false);
     }
   }
 
@@ -1300,7 +1615,8 @@ socket.on("electronicRoomPlayersIDs", (ids)=>{
 
 socket.on("orchestraSynthTaken", (boolean)=>{
   orchestraSynthTaken = boolean;
-  if(boolean == true){
+  console.log(orchestraSynthTaken);
+  if(orchestraSynthTaken == true){
     if(currentRoom == "orchestra"){
       synthRoleButton.style.backgroundColor = "white";
       synthRoleButton.style.color = "black";
@@ -1315,7 +1631,7 @@ socket.on("orchestraSynthTaken", (boolean)=>{
 
 socket.on("orchestraDrumTaken", (boolean)=>{
   orchestraDrumTaken = boolean;
-  if(boolean == true){
+  if(orchestraDrumTaken == true){
     if(currentRoom == "orchestra"){
       drumRoleButton.style.backgroundColor = "white";
       drumRoleButton.style.color = "black";
@@ -1330,7 +1646,7 @@ socket.on("orchestraDrumTaken", (boolean)=>{
 
 socket.on("rockSynthTaken", (boolean)=>{
   rockSynthTaken = boolean;
-  if(boolean == true){
+  if(rockSynthTaken == true){
     if(currentRoom == "rock"){
       synthRoleButton.style.backgroundColor = "white";
       synthRoleButton.style.color = "black";
@@ -1345,7 +1661,7 @@ socket.on("rockSynthTaken", (boolean)=>{
 
 socket.on("rockDrumTaken", (boolean)=>{
   rockDrumTaken = boolean;
-  if(boolean == true){
+  if(rockDrumTaken == true){
     if(currentRoom == "rock"){
       drumRoleButton.style.backgroundColor = "white";
       drumRoleButton.style.color = "black";
@@ -1360,7 +1676,7 @@ socket.on("rockDrumTaken", (boolean)=>{
 
 socket.on("electronicSynthTaken", (boolean)=>{
   electronicSynthTaken = boolean;
-  if(boolean == true){
+  if(electronicSynthTaken == true){
     if(currentRoom == "electronic"){
       synthRoleButton.style.backgroundColor = "white";
       synthRoleButton.style.color = "black";
@@ -1375,7 +1691,7 @@ socket.on("electronicSynthTaken", (boolean)=>{
 
 socket.on("electronicDrumTaken", (boolean)=>{
   electronicDrumTaken = boolean;
-  if(boolean == true){
+  if(electronicDrumTaken == true){
     if(currentRoom == "electronic"){
       drumRoleButton.style.backgroundColor = "white";
       drumRoleButton.style.color = "black";
@@ -1401,42 +1717,42 @@ socket.on("playDrum", (number)=>{
 socket.on("playNote", (number)=>{
   if(currentRoom == "orchestra"){
     if(number == 1){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('G4').stop(ac.currentTime + orchestraShortRelease);
       })
     }
     if(number == 2){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('F4').stop(ac.currentTime + orchestraShortRelease);
       })
     }
     if(number == 3){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('Eb4').stop(ac.currentTime + orchestraShortRelease);
       })
     }
     if(number == 4){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('D4').stop(ac.currentTime + orchestraShortRelease);
       })
     }
     if(number == 5){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('C4').stop(ac.currentTime + orchestraShortRelease);
       })
     }
     if(number == 6){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('Bb3').stop(ac.currentTime + orchestraShortRelease);
       })
     }
     if(number == 7){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('A3').stop(ac.currentTime + orchestraShortRelease);
       })
     }
     if(number == 8){
-      Soundfont.instrument(ac, 'french_horn').then(function (french_horn) {
+      Soundfont.instrument(ac, 'french_horn', {gain: orchestraMelodyVolume}).then(function (french_horn) {
         french_horn.play('G3').stop(ac.currentTime + orchestraShortRelease);
       })
     }
@@ -1444,84 +1760,84 @@ socket.on("playNote", (number)=>{
 
   if(currentRoom == "rock"){
     if(number == 1){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('C4').stop(ac.currentTime + rockShortRelease);
       })
     }
     if(number == 2){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('B3').stop(ac.currentTime + rockShortRelease);
       })
     }
     if(number == 3){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('A3').stop(ac.currentTime + rockShortRelease);
       })
     }
     if(number == 4){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('G3').stop(ac.currentTime + rockShortRelease);
       })
     }
     if(number == 5){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('F3').stop(ac.currentTime + rockShortRelease);
       })
     }
     if(number == 6){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('E3').stop(ac.currentTime + rockShortRelease);
       })
     }
     if(number == 7){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('D3').stop(ac.currentTime + rockShortRelease);
       })
     }
     if(number == 8){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockMelodyVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('C3').stop(ac.currentTime + rockShortRelease);
       })
     }
   }
   if(currentRoom == "electronic"){
     if(number == 1){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('Eb5').stop(ac.currentTime + electronicShortRelease);
       })
     }
     if(number == 2){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('D5').stop(ac.currentTime + electronicShortRelease);
       })
     }
     if(number == 3){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('C5').stop(ac.currentTime + electronicShortRelease);
       })
     }
     if(number == 4){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('Bb4').stop(ac.currentTime + electronicShortRelease);
       })
     }
     if(number == 5){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('Ab4').stop(ac.currentTime + electronicShortRelease);
       })
     }
     if(number == 6){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('G4').stop(ac.currentTime + electronicShortRelease);
       })
     }
     if(number == 7){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('F4').stop(ac.currentTime + electronicShortRelease);
       })
     }
     if(number == 8){
-      Soundfont.instrument(ac, 'synth_brass_1').then(function (synth_brass_1) {
+      Soundfont.instrument(ac, 'synth_brass_1', {gain: electronicMelodyVolume}).then(function (synth_brass_1) {
         synth_brass_1.play('Eb4').stop(ac.currentTime + electronicShortRelease);
       })
     }
@@ -1531,56 +1847,56 @@ socket.on("playNote", (number)=>{
 socket.on("playChord", (number)=>{
   if(currentRoom == "orchestra"){
     if(number == 1){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('D5').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('Bb4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('G4').stop(ac.currentTime + orchestraLongRelease);
       })
     }
     if(number == 2){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('C5').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('A4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('F4').stop(ac.currentTime + orchestraLongRelease);
       })
     }
     if(number == 3){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('Bb4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('G4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('Eb4').stop(ac.currentTime + orchestraLongRelease);
       })
     }
     if(number == 4){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('A4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('F4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('D4').stop(ac.currentTime + orchestraLongRelease);
       })
     }
     if(number == 5){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('G4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('Eb4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('C4').stop(ac.currentTime + orchestraLongRelease);
       })
     }
     if(number == 6){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('F4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('D4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('Bb3').stop(ac.currentTime + orchestraLongRelease);
       })
     }
     if(number == 7){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('Eb4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('C4').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('A3').stop(ac.currentTime + orchestraLongRelease);
       })
     }
     if(number == 8){
-      Soundfont.instrument(ac, 'choir_aahs').then(function (choir_aahs) {
+      Soundfont.instrument(ac, 'choir_aahs', {gain: orchestraChordVolume}).then(function (choir_aahs) {
         choir_aahs.play('D3').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('Bb3').stop(ac.currentTime + orchestraLongRelease);
         choir_aahs.play('G3').stop(ac.currentTime + orchestraLongRelease);
@@ -1590,56 +1906,56 @@ socket.on("playChord", (number)=>{
 
   if(currentRoom == "rock"){
     if(number == 1){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('G4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('E4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('C4').stop(ac.currentTime + rockLongRelease);
       })
     }
     if(number == 2){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('F4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('D4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('B3').stop(ac.currentTime + rockLongRelease);
       })
     }
     if(number == 3){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('E4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('C4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('A3').stop(ac.currentTime + rockLongRelease);
       })
     }
     if(number == 4){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('D4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('B3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('G3').stop(ac.currentTime + rockLongRelease);
       })
     }
     if(number == 5){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('C4').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('A3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('F3').stop(ac.currentTime + rockLongRelease);
       })
     }
     if(number == 6){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('B3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('G3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('E3').stop(ac.currentTime + rockLongRelease);
       })
     }
     if(number == 7){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('A3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('F3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('D3').stop(ac.currentTime + rockLongRelease);
       })
     }
     if(number == 8){
-      Soundfont.instrument(ac, 'overdriven_guitar').then(function (overdriven_guitar) {
+      Soundfont.instrument(ac, 'overdriven_guitar', {gain: rockChordVolume}).then(function (overdriven_guitar) {
         overdriven_guitar.play('G3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('E3').stop(ac.currentTime + rockLongRelease);
         overdriven_guitar.play('C3').stop(ac.currentTime + rockLongRelease);
@@ -1648,56 +1964,56 @@ socket.on("playChord", (number)=>{
   }
   if(currentRoom == "electronic"){
     if(number == 1){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('Bb4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('G4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('Eb4').stop(ac.currentTime + electronicLongRelease);
       })
     }
     if(number == 2){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('Ab4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('F4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('D4').stop(ac.currentTime + electronicLongRelease);
       })
     }
     if(number == 3){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('G4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('Eb4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('C4').stop(ac.currentTime + electronicLongRelease);
       })
     }
     if(number == 4){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('F4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('D4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('Bb3').stop(ac.currentTime + electronicLongRelease);
       })
     }
     if(number == 5){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('Eb4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('C4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('Ab3').stop(ac.currentTime + electronicLongRelease);
       })
     }
     if(number == 6){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('D4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('Bb3').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('G3').stop(ac.currentTime + electronicLongRelease);
       })
     }
     if(number == 7){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('C4').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('Ab3').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('F3').stop(ac.currentTime + electronicLongRelease);
       })
     }
     if(number == 8){
-      Soundfont.instrument(ac, 'pad_3_polysynth').then(function (pad_3_polysynth) {
+      Soundfont.instrument(ac, 'pad_3_polysynth', {gain: electronicChordVolume}).then(function (pad_3_polysynth) {
         pad_3_polysynth.play('Bb3').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('G3').stop(ac.currentTime + electronicLongRelease);
         pad_3_polysynth.play('Eb3').stop(ac.currentTime + electronicLongRelease);
@@ -1817,6 +2133,73 @@ electronicLongReleaseSlider.addEventListener("change", ()=>{
   console.log("Electronic Long Release is now: " + electronicLongRelease + "s");
   socket.emit("electronicLongReleaseSliderChanged", electronicLongReleaseSlider.value);
 })
+
+
+
+let orchestraMelodyVolumeSlider = document.getElementById("orchestraMelodyVolumeSlider");
+let orchestraChordVolumeSlider = document.getElementById("orchestraChordVolumeSlider");
+let rockMelodyVolumeSlider = document.getElementById("rockMelodyVolumeSlider");
+let rockChordVolumeSlider = document.getElementById("rockChordVolumeSlider");
+let electronicMelodyVolumeSlider = document.getElementById("electronicMelodyVolumeSlider");
+let electronicChordVolumeSlider = document.getElementById("electronicChordVolumeSlider");
+
+
+orchestraMelodyVolumeSlider.addEventListener("change", ()=>{
+  orchestraMelodyVolume = orchestraMelodyVolumeSlider.value/1000;
+  socket.emit("orchestraMelodyVolumeSliderChanged", orchestraMelodyVolumeSlider.value);
+})
+socket.on("orchestraMelodyVolumeSlider", (sliderValue)=>{
+  orchestraMelodyVolume = sliderValue/1000;
+  orchestraMelodyVolumeSlider.value = sliderValue;
+})
+orchestraChordVolumeSlider.addEventListener("change", ()=>{
+  orchestraChordVolume = orchestraChordVolumeSlider.value/1000;
+  socket.emit("orchestraChordVolumeSliderChanged", orchestraChordVolumeSlider.value);
+})
+socket.on("orchestraChordVolumeSlider", (sliderValue)=>{
+  orchestraChordVolume = sliderValue/1000;
+  orchestraChordVolumeSlider.value = sliderValue;
+})
+
+
+rockMelodyVolumeSlider.addEventListener("change", ()=>{
+  rockMelodyVolume = rockMelodyVolumeSlider.value/1000;
+  socket.emit("rockMelodyVolumeSliderChanged", rockMelodyVolumeSlider.value);
+})
+socket.on("rockMelodyVolumeSlider", (sliderValue)=>{
+  rockMelodyVolume = sliderValue/1000;
+  rockMelodyVolumeSlider.value = sliderValue;
+})
+rockChordVolumeSlider.addEventListener("change", ()=>{
+  rockChordVolume = rockChordVolumeSlider.value/1000;
+  socket.emit("rockChordVolumeSliderChanged", rockChordVolumeSlider.value);
+})
+socket.on("rockChordVolumeSlider", (sliderValue)=>{
+  rockChordVolume = sliderValue/1000;
+  rockChordVolumeSlider.value = sliderValue;
+})
+
+
+electronicMelodyVolumeSlider.addEventListener("change", ()=>{
+  electronicMelodyVolume = electronicMelodyVolumeSlider.value/1000;
+  socket.emit("electronicMelodyVolumeSliderChanged", electronicMelodyVolumeSlider.value);
+})
+socket.on("electronicMelodyVolumeSlider", (sliderValue)=>{
+  electronicMelodyVolume = sliderValue/1000;
+  electronicMelodyVolumeSlider.value = sliderValue;
+})
+electronicChordVolumeSlider.addEventListener("change", ()=>{
+  electronicChordVolume = electronicChordVolumeSlider.value/1000;
+  socket.emit("electronicChordVolumeSliderChanged", electronicChordVolumeSlider.value);
+})
+socket.on("electronicChordVolumeSlider", (sliderValue)=>{
+  electronicChordVolume = sliderValue/1000;
+  electronicChordVolumeSlider.value = sliderValue;
+})
+
+
+
+
 
 
 

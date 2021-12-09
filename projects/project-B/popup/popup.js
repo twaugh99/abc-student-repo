@@ -127,25 +127,25 @@ window.addEventListener('load', (event) => {
   });
 });
 
-document.getElementById("historyModeButton").style.backgroundColor = "#A9A9A9";
+// document.getElementById("historyModeButton").style.backgroundColor = "#A9A9A9";
 document.getElementById("drumOnButton").style.backgroundColor = "#A9A9A9";
-document.getElementById("historyModePlaybackButton").style.visibility = "hidden";
+// document.getElementById("historyModePlaybackButton").style.visibility = "hidden";
 
-document.getElementById("historyModeButton").addEventListener("click", ()=>{
-  document.getElementById("historyModeButton").style.backgroundColor = "white";
-  document.getElementById("liveModeButton").style.backgroundColor = "#A9A9A9";
-  document.getElementById("historyModePlaybackButton").style.visibility = "visible";
-  saveState("modeInfo", "history");
-  port.postMessage({type: "modeInfo", mode: "history"});
-})
-
-document.getElementById("liveModeButton").addEventListener("click", ()=>{
-  document.getElementById("historyModeButton").style.backgroundColor = "#A9A9A9";
-  document.getElementById("liveModeButton").style.backgroundColor = "white";
-  document.getElementById("historyModePlaybackButton").style.visibility = "hidden";
-  saveState("modeInfo", "live");
-  port.postMessage({type: "modeInfo", mode: "live"});
-})
+// document.getElementById("historyModeButton").addEventListener("click", ()=>{
+//   document.getElementById("historyModeButton").style.backgroundColor = "white";
+//   document.getElementById("liveModeButton").style.backgroundColor = "#A9A9A9";
+//   document.getElementById("historyModePlaybackButton").style.visibility = "visible";
+//   saveState("modeInfo", "history");
+//   port.postMessage({type: "modeInfo", mode: "history"});
+// })
+//
+// document.getElementById("liveModeButton").addEventListener("click", ()=>{
+//   document.getElementById("historyModeButton").style.backgroundColor = "#A9A9A9";
+//   document.getElementById("liveModeButton").style.backgroundColor = "white";
+//   document.getElementById("historyModePlaybackButton").style.visibility = "hidden";
+//   saveState("modeInfo", "live");
+//   port.postMessage({type: "modeInfo", mode: "live"});
+// })
 
 document.getElementById("drumOffButton").addEventListener("click", ()=>{
   document.getElementById("drumOnButton").style.backgroundColor = "#A9A9A9";
@@ -171,9 +171,9 @@ document.getElementById("scaleDropdown").addEventListener("change", ()=>{
   port.postMessage({type: "scaleInfo", scale: scaleDropdown.value});
 })
 
-document.getElementById("historyModePlaybackButton").addEventListener("click", ()=>{
-  port.postMessage({type: "historyModePlaybackInfo"});
-})
+// document.getElementById("historyModePlaybackButton").addEventListener("click", ()=>{
+//   port.postMessage({type: "historyModePlaybackInfo"});
+// })
 
 var port = chrome.extension.connect({
       name: "Communication"

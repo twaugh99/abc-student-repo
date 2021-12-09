@@ -33,6 +33,8 @@ trumpetPlayerGif.style.visibility = "hidden";
 
 midiAudio = document.getElementById("midiAudioHTMLObject");
 
+
+
 document.body.addEventListener('mousemove', e =>{
   // console.log(e.screenX);
   // console.log(e.screenY);
@@ -113,19 +115,25 @@ document.body.addEventListener('mousemove', e =>{
   }
 })
 
-// var playPromise = document.querySelector('video');
+// let playPromise = document.getElementById('midiAudioHTMLObject');
 // https://stackoverflow.com/questions/37674223/domexception-failed-to-load-because-no-supported-source-was-found/43434754
 
 document.getElementById("mainVideo").addEventListener("click", ()=>{
     if(videoStarted == 0){
       videoStarted = 1;
-      video.currentTime = 1;
+      video.currentTime = 1.35;
       video.play();
       // setTimeout(() => {playPromise.play();}, 400);
 
 
       // setTimeout(() => {midiAudio.play();}, 400);
 
-      setTimeout(() => {MIDIjs.play('nevergonnagiveuup.mid');}, 400);
+      // setTimeout(() => {MIDIjs.play('nevergonnagiveuup.mid');}, 400);
+
+      MIDIjs.play('nevergonnagiveuup.mid');
     }
 })
+
+midiAudio.addEventListener('canplay', ()=>{
+  console.log('midi audio loaded');
+});

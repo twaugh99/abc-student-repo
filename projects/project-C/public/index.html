@@ -13,10 +13,12 @@
       <h1>Welcome to ServerJam!</h1>
       <h3>ServerJam is a socket-based website where users can make music together online.</h3>
       <h3>There are two roles: Synth and Drum</h3>
-      <h3>The Synth role controls a synth clicking around the canvas.</h3>
-      <h3>The Synth role can play chords by holding space when clicking.</h3>
+      <h3>The Synth role controls a synth clicking around the canvas. Each bar is a different note.</h3>
+      <h3>The Synth role can play chords by holding the space bar down when clicking.</h3>
+      <h3>The Synth role can change the release and volume of the Melody Synth and Chord Synth.</h3>
       <h3>Don't click too fast in Synth mode because this program uses a buffering system for notes.</h3>
       <h3>The Drum role can play the drums by pressing keys A-K.</h3>
+      <h3>The Drum role can change the volume of each drum.</h3>
       <h3>There are three different rooms which have different sound presets.</h3>
       <h3>Users can only interact with other users in the same room.</h3>
       <h3>Users can use the chatbox to communicate with their "bandmate."</h3>
@@ -63,96 +65,228 @@
 
 
     <div id="canvasDiv">
-      <h1 id="currentRoomText"></h1>
 
-      <div id="leftCanvasDiv">
-        <div id="chatBoxDiv">
-          <h5>Chat:</h5>
-          <div id="chatbox">
-            <ul id="chat">
-                <!-- <li><p><span class="sender">Sender: </span>Message</p></li> -->
-            </ul>
-          </div>
-          <div id="messagebox">
-            <input autocomplete="off" type="text" id="message" placeholder=""> <button id="send">Send</button>
-          </div>
+
+      <div class="outerContainer">
+        <div class="titleWrapper">
+          <h1 id="currentRoomText"></h1>
         </div>
 
-        <div id="inRoomDiv">
-          <h5>In Room:</h5>
-          <div id="playersInMyRoomDiv">
-          </div>
-          <button id="leaveRoomButton">Change Room</button>
-        </div>
+        <div id="gameDiv">
+          <div id="leftCanvasDiv">
+            <div id="chatBoxDiv">
+              <h5>Chat:</h5>
+              <div id="chatbox">
+                <ul id="chat">
+                    <!-- <li><p><span class="sender">Sender: </span>Message</p></li> -->
+                </ul>
+              </div>
+              <div id="messagebox">
+                <input autocomplete="off" type="text" id="message" placeholder=""> <button id="send">Send</button>
+              </div>
+            </div>
 
+            <div id="inRoomDiv">
+              <h5>In Room:</h5>
+              <div id="playersInMyRoomDiv">
+              </div>
+              <button id="leaveRoomButton">Change Room</button>
+            </div>
+
+          </div>
+
+
+          <div id="middleCanvasDiv">
+            <div id="canvasOnlyDiv">
+            </div>
+          </div>
+
+
+          <div id="rightCanvasDiv">
+            <div id="selectRoleDiv">
+              <h5>Role:</h5>
+              <div id="selectRoleButtonsDiv">
+                <button id="synthRoleButton" class="selectRoleButton">Synth</button>
+                <button id="drumRoleButton" class="selectRoleButton">Drums</button>
+              </div>
+
+
+              <div id="synthControlsDiv">
+
+                <h5 class="settingsHeader">Synth Settings:</h5>
+                <div id="orchestraSlidersDiv">
+                  <div id="orchestraShortReleaseSliderDiv">
+                    <h6>Melody Release</h6>
+                    <input type="range" min="200" max="5000" value="1000" id="orchestraShortReleaseSlider">
+                  </div>
+                  <div id="orchestraLongReleaseSliderDiv">
+                    <h6>Chord Release</h6>
+                    <input type="range" min="200" max="5000" value="2000" id="orchestraLongReleaseSlider">
+                  </div>
+                  <div id="orchestraMelodyVolumeSliderDiv">
+                    <h6>Melody Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraMelodyVolumeSlider">
+                  </div>
+                  <div id="orchestraChordVolumeSliderDiv">
+                    <h6>Chord Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraChordVolumeSlider">
+                  </div>
+                </div>
+                <div id="rockSlidersDiv">
+                  <div id="rockShortReleaseSliderDiv">
+                    <h6>Melody Release</h6>
+                    <input type="range" min="200" max="5000" value="1000" id="rockShortReleaseSlider">
+                  </div>
+                  <div id="rockLongReleaseSliderDiv">
+                    <h6>Chord Release</h6>
+                    <input type="range" min="200" max="5000" value="2000" id="rockLongReleaseSlider">
+                  </div>
+                  <div id="rockMelodyVolumeSliderDiv">
+                    <h6>Melody Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockMelodyVolumeSlider">
+                  </div>
+                  <div id="rockChordVolumeSliderDiv">
+                    <h6>Chord Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockChordVolumeSlider">
+                  </div>
+                </div>
+                <div id="electronicSlidersDiv">
+                  <div id="electronicShortReleaseSliderDiv">
+                    <h6>Melody Release</h6>
+                    <input type="range" min="200" max="5000" value="1000" id="electronicShortReleaseSlider">
+                  </div>
+                  <div id="electronicLongReleaseSliderDiv">
+                    <h6>Chord Release</h6>
+                    <input type="range" min="200" max="5000" value="2000" id="electronicLongReleaseSlider">
+                  </div>
+                  <div id="electronicMelodyVolumeSliderDiv">
+                    <h6>Melody Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="electronicMelodyVolumeSlider">
+                  </div>
+                  <div id="electronicChordVolumeSliderDiv">
+                    <h6>Chord Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="electronicChordVolumeSlider">
+                  </div>
+                </div>
+
+              </div>
+
+              <div id="drumControlsDiv">
+
+                <h5 class="settingsHeader">Drum Settings:</h5>
+                <div id="orchestraDrumSlidersDiv">
+                  <div id="orchestraDrum1VolumeSliderDiv">
+                    <h6>Tom 1 Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum1VolumeSlider">
+                  </div>
+                  <div id="orchestraDrum2VolumeSliderDiv">
+                    <h6>Tom 2 Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum2VolumeSlider">
+                  </div>
+                  <div id="orchestraDrum3VolumeSliderDiv">
+                    <h6>Tambourine Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum3VolumeSlider">
+                  </div>
+                  <div id="orchestraDrum4VolumeSliderDiv">
+                    <h6>Triangle Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum4VolumeSlider">
+                  </div>
+                  <div id="orchestraDrum5VolumeSliderDiv">
+                    <h6>Snare Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum5VolumeSlider">
+                  </div>
+                  <div id="orchestraDrum6VolumeSliderDiv">
+                    <h6>Woodblock 1 Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum6VolumeSlider">
+                  </div>
+                  <div id="orchestraDrum7VolumeSliderDiv">
+                    <h6>Woodblock 2 Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum7VolumeSlider">
+                  </div>
+                  <div id="orchestraDrum8VolumeSliderDiv">
+                    <h6>Crash Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="orchestraDrum8VolumeSlider">
+                  </div>
+                </div>
+
+                <div id="rockDrumSlidersDiv">
+                  <div id="rockDrum1VolumeSliderDiv">
+                    <h6>Kick Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum1VolumeSlider">
+                  </div>
+                  <div id="rockDrum2VolumeSliderDiv">
+                    <h6>Hi-Hat Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum2VolumeSlider">
+                  </div>
+                  <div id="rockDrum3VolumeSliderDiv">
+                    <h6>Tom 1 Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum3VolumeSlider">
+                  </div>
+                  <div id="rockDrum4VolumeSliderDiv">
+                    <h6>Tom 2 Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum4VolumeSlider">
+                  </div>
+                  <div id="rockDrum5VolumeSliderDiv">
+                    <h6>Snare Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum5VolumeSlider">
+                  </div>
+                  <div id="rockDrum6VolumeSliderDiv">
+                    <h6>Open Hat Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum6VolumeSlider">
+                  </div>
+                  <div id="rockDrum7VolumeSliderDiv">
+                    <h6>Ride Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum7VolumeSlider">
+                  </div>
+                  <div id="rockDrum8VolumeSliderDiv">
+                    <h6>Crash Volume</h6>
+                    <input type="range" min="0" max="1000" value="500" id="rockDrum8VolumeSlider">
+                  </div>
+                </div>
+
+                <div id="electronicDrumSlidersDiv">
+                  <div id="electronicDrum1VolumeSliderDiv">
+                    <h6>Kick Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum1VolumeSlider">
+                  </div>
+                  <div id="electronicDrum2VolumeSliderDiv">
+                    <h6>Perc 1 Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum2VolumeSlider">
+                  </div>
+                  <div id="electronicDrum3VolumeSliderDiv">
+                    <h6>Perc 2 Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum3VolumeSlider">
+                  </div>
+                  <div id="electronicDrum4VolumeSliderDiv">
+                    <h6>Perc 3 Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum4VolumeSlider">
+                  </div>
+                  <div id="electronicDrum5VolumeSliderDiv">
+                    <h6>Clap Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum5VolumeSlider">
+                  </div>
+                  <div id="electronicDrum6VolumeSliderDiv">
+                    <h6>Hi-Hat Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum6VolumeSlider">
+                  </div>
+                  <div id="electronicDrum7VolumeSliderDiv">
+                    <h6>Snare Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum7VolumeSlider">
+                  </div>
+                  <div id="electronicDrum8VolumeSliderDiv">
+                    <h6>Crash Volume</h6>
+                    <input type="range" min="0" max="500" value="250" id="electronicDrum8VolumeSlider">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
       </div>
-
-
-      <div id="middleCanvasDiv">
-        <div id="canvasOnlyDiv">
-        </div>
-      </div>
-
-
-      <div id="rightCanvasDiv">
-        <div id="selectRoleDiv">
-          <h5>Role:</h5>
-          <div id="selectRoleButtonsDiv">
-            <button id="synthRoleButton" class="selectRoleButton">Synth</button>
-            <button id="drumRoleButton" class="selectRoleButton">Drums</button>
-          </div>
-        </div>
-        <div id="synthControlsDiv">
-
-          <h5>Synth Settings:</h5>
-          <div id="orchestraSlidersDiv">
-            <div id="orchestraShortReleaseSliderDiv">
-              <h6>Melody Release</h6>
-              <input type="range" min="200" max="5000" value="1000" id="orchestraShortReleaseSlider">
-            </div>
-            <div id="orchestraLongReleaseSliderDiv">
-              <h6>Chord Release</h6>
-              <input type="range" min="200" max="5000" value="2000" id="orchestraLongReleaseSlider">
-            </div>
-          </div>
-          <div id="rockSlidersDiv">
-            <div id="rockShortReleaseSliderDiv">
-              <h6>Melody Release</h6>
-              <input type="range" min="200" max="5000" value="1000" id="rockShortReleaseSlider">
-            </div>
-            <div id="rockLongReleaseSliderDiv">
-              <h6>Chord Release</h6>
-              <input type="range" min="200" max="5000" value="2000" id="rockLongReleaseSlider">
-            </div>
-          </div>
-          <div id="electronicSlidersDiv">
-            <div id="electronicShortReleaseSliderDiv">
-              <h6>Melody Release</h6>
-              <input type="range" min="200" max="5000" value="1000" id="electronicShortReleaseSlider">
-            </div>
-            <div id="electronicLongReleaseSliderDiv">
-              <h6>Chord Release</h6>
-              <input type="range" min="200" max="5000" value="2000" id="electronicLongReleaseSlider">
-            </div>
-          </div>
-
-        </div>
-        <div id="drumControlsDiv">
-          <h5>Drum Settings:</h5>
-
-        </div>
-      </div>
-
-
-
-
-
-
-
     </div>
     <script src="soundfont-player.js"></script>
-
     <script src="script.js" charset="utf-8"></script>
-
   </body>
 </html>
